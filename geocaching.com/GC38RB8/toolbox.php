@@ -1,33 +1,12 @@
 <?php
+
+define("PERK_WIDTH", 140);
+define("PERK_HEIGHT", 140);
+
 require_once('rules.php');
+require_once('token.php');
 
-function base64_url_encode($input) {
-    return strtr(base64_encode($input), '+=', '_-');
-}
-
-function base64_url_decode($input) {
-    return base64_decode(strtr($input, '_-', '+='));
-}
-
-
-function sha1_encrypt($pass, $plain)
-{
- $i = 0;
- $len = strlen($plain);
- $cipher = $pass;
- $result = '';
- while ($i < $len) {
-	$cipher = sha1("/$cipher/$i/$pass/", true);
-#	echo "key: /$cipher/$i/$pass/<br />\n";
-	$pool = strlen($cipher); // 20
-	$chunk = substr($plain, $i, $pool);
-	$i += $pool;
-	$r = $cipher ^ $chunk;
-	$result .= $r;
- }
- return $result;
-}
-
+require_once('phpseclib/AES.php');
 
 function ohodnot_hrace($klice_str)
 {
@@ -42,4 +21,15 @@ function ohodnot_hrace($klice_str)
   $vystup = vyhodnot_klice($klice);
 
   return $vystup;
+}
+
+function array_keys_true($keys)
+{
+  $res = array();
+  foreach ($keys as $k => $v) {
+    if ($v) {
+	$res[] = $k;
+    }
+  }
+  return $res;
 }

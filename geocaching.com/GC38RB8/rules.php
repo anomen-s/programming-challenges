@@ -19,6 +19,19 @@ function vyhodnot_klice($vstup)
 	    
 	}
 
+	if ($vstup[3]) {
+	    $vystup[104] = true;
+	    
+	}
+
+	if ($vstup[6]) {
+	    $vystup[102] = true;
+	    $vystup[104] = true;
+	    $vystup[101] = true;
+	    
+	}
+
+
 	if ($vstup[1] && $vstup[9]) {
 	    $vystup[101] = false;
 	    $vystup[104] = true;
