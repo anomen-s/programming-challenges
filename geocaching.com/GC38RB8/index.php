@@ -68,8 +68,13 @@ foreach ($params as $p) {
 <p>
 <?php
 
+
 if (!empty($U['klice'])) {
   echo "<div id=\"result\">\n";
+
+if (!ip_check()) {
+    echo "<span style=\"color:red;font-weight:bold\">OPAKOVANY POKUS</span>";
+}
 
 //	  echo "volam  ohodnot_hrace(${U['klice']})"; // DEBUG
   $perky = ohodnot_hrace($U['klice']);

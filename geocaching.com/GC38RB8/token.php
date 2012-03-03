@@ -1,5 +1,7 @@
 <?php
 
+require_once('phpseclib/AES.php');
+
 define(SEED_LENGTH, 2);
 define(PASSWORD, "my secret pass");
 

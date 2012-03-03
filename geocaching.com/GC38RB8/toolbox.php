@@ -5,8 +5,8 @@ define("PERK_HEIGHT", 140);
 
 require_once('rules.php');
 require_once('token.php');
+require_once('ipcheck.php');
 
-require_once('phpseclib/AES.php');
 
 function ohodnot_hrace($klice_str)
 {
