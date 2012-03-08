@@ -3,7 +3,6 @@
 require_once('phpseclib/AES.php');
 
 define(SEED_LENGTH, 2);
-define(PASSWORD, "my secret pass");
 
 function base64_url_encode($input) {
     return strtr(base64_encode($input), '+', '_');
@@ -41,7 +40,7 @@ function aes_encrypt($pass, $plaintext)
     $i = 'a';
     while (strlen($pass) < $size) {
             $pass .= $i;
-//            $i++;
+            $i++;
     }
     $aes->setKey($pass);
 
@@ -56,7 +55,7 @@ function aes_decrypt($pass, $cipher)
     $i = 'a';
     while (strlen($pass) < $size) {
             $pass .= $i;
-//            $i++;
+            $i++;
     }
     $aes->setKey($pass);
 
@@ -101,6 +100,7 @@ function decodeToken($token)
     readfile('img/no.png');
     die;
   }
+  header('X-Token: ' . $token_dec);
   
   $token_list = explode($sep,$token_dec);
   $U['seed'] = array_shift($token_list);
@@ -108,6 +108,11 @@ function decodeToken($token)
   $U['karma'] = array_shift($token_list);
   $U['penize'] = array_shift($token_list);
   $U['jidlo'] = array_shift($token_list);
+  foreach($token_list as $k=> $v) {
+    if (empty($v)) {
+       unset($token_list[$k]);
+    }
+  }
   $U['perky'] = $token_list;
   
   return $U;

@@ -20,8 +20,8 @@ $token = $_SERVER["QUERY_STRING"];
 //echo "</div>\n";
 
   $U = decodeToken($token);
-  
-// header('X-Token: ' . $token);
+  $skore = spocti_skore($U);
+//  header('X-Token: ' . $token);
 // DEV
 //$perks = explode('!', $token);
 
@@ -48,8 +48,9 @@ for ($i=2; $i < 8; $i ++) {
 
 $text_color = imagecolorallocate($certimg, 0x00, 0xff, 0x00);
 $ii = chr(0xED);
-imagestring($certimg, 5, 20, 10,  "${U[login]}", $text_color);
-imagestring($certimg, 5, 20, 30,  "Pen${ii}ze: ${U[penize]}   |   Karma: ${U[karma]}   |    J${ii}dlo: ${U[jidlo]}", $text_color);
+imagestring($certimg, 5, 20, 10, "${U[login]}", $text_color);
+imagestring($certimg, 5, 20, 30, "Pen${ii}ze: ${U[penize]}   |   Karma: ${U[karma]}   |    J${ii}dlo: ${U[jidlo]}", $text_color);
+imagestring($certimg, 5, 180, 10, "Skore $skore", $text_color);
 
 //imagejpeg($certimg, NULL, 100);
 imagepng($certimg);

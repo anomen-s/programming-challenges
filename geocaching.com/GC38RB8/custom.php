@@ -1,14 +1,21 @@
 <?php
 
+// heslo pro generovani certifikatu
+define ('PASSWORD', "my secRet passw0rd_1");
+
+// velikost obrazku (perky)
+define("PERK_WIDTH", 140);
+define("PERK_HEIGHT", 140);
 
 
 /**
  * Vyhodnoti zadany vstup a vrati seznam perku.
+ * Vstup i vystup jsou pole, kde klic je identifikator a hodnota je true/false
  */
 function vyhodnot_klice($vstup)
 {
 	$vystup = array();
-  
+
 	if ($vstup[1]) {
 	    $vystup[102] = true;
 	    
@@ -50,4 +57,12 @@ function vyhodnot_klice($vstup)
 	return $vystup;
 }
 
+/**
+ * spocita body
+ */
+function spocti_skore($U)
+{
 
+    return count($U['perky']) + $U['karma'] + $U['penize'] + $U['jidlo'];
+    // return $penize + $karma + $jidlo;
+}

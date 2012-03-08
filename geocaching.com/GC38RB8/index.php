@@ -87,13 +87,14 @@ if (!ip_check()) {
   echo "<hr /> odkaz pro zalogovani:<br />\n";
   
   $token_b64 = getToken($U, array_keys_true($perky));
-  $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}${_SERVER['SCRIPT_NAME']}?$token_b64";
-  $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}/~guppy/fallout/cert.php?$token_b64";
+  $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}" .  str_replace('index.php','cert.php', $_SERVER['SCRIPT_NAME']) . "?$token_b64";
+//  $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}/~guppy/fallout/cert.php?$token_b64";
   
   //TEST
 //  $script = 'http://guppy.zemeplocha.info:10080/~guppy/fallout/cert.php?' . implode('/', array_keys($perky));
   
-  echo "<a href=\"$script\">[url=$script][/url] </a><br />\n";
+//  echo "<a href=\"$script\">[url=$script][/url] </a><br />\n";
+  echo "<a href=\"$script\">$token_b64</a><br />\n";
   echo "</div>\n";
 
 //  print_r(decodeToken($token_b64));

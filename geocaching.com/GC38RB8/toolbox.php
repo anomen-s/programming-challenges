@@ -1,9 +1,6 @@
 <?php
 
-define("PERK_WIDTH", 140);
-define("PERK_HEIGHT", 140);
-
-require_once('rules.php');
+require_once('custom.php');
 require_once('token.php');
 require_once('ipcheck.php');
 

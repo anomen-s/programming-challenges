@@ -5,7 +5,8 @@ body {
 }
 
 div#input_div {
-    background-color: green;
+    color: #77ff77;
+    background-color: black;
     width : 400px;
     margin : auto; 
     margin-top:60px;
@@ -13,12 +14,13 @@ div#input_div {
 }
 
 
+
 div#result {
 
-    background-color: #007700;
+    color: #77ff77;
+    background-color: black;
     width : 400px;
     margin : auto; 
     margin-top:60px;
-    
 
 }
