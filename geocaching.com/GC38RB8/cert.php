@@ -11,20 +11,8 @@ if (empty($_SERVER["QUERY_STRING"])) {
 
 $token = $_SERVER["QUERY_STRING"];
 
-
-  
-//$token = sha1_encrypt("my secret password", "$login/$klice");
-//$token_b64 = base64_url_encode($token);
-//$script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}${_SERVER['SCRIPT_NAME']}";
-//echo "<tt>[url=$script?$token_b64][/url] </tt><br />\n";
-//echo "</div>\n";
-
-  $U = decodeToken($token);
-  $skore = spocti_skore($U);
-//  header('X-Token: ' . $token);
-// DEV
-//$perks = explode('!', $token);
-
+$U = decodeToken($token);
+$skore = spocti_skore($U);
 
 $certimg = imagecreatetruecolor(PERK_WIDTH*3+100, PERK_HEIGHT*3+100);
 $bg = imagecolorallocate($certimg, 0xd0, 0xd0, 0xd0);

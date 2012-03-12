@@ -3,6 +3,9 @@
 // heslo pro generovani certifikatu
 define ('PASSWORD', "my secRet passw0rd_1");
 
+// adresar pro docasne soubory (ip check)
+define ('TMPDIR', '/tmp');
+
 // velikost obrazku (perky)
 define("PERK_WIDTH", 140);
 define("PERK_HEIGHT", 140);
@@ -35,7 +38,6 @@ function vyhodnot_klice($vstup)
 	    $vystup[102] = true;
 	    $vystup[104] = true;
 	    $vystup[101] = true;
-	    
 	}
 
 
@@ -62,7 +64,5 @@ function vyhodnot_klice($vstup)
  */
 function spocti_skore($U)
 {
-
     return count($U['perky']) + $U['karma'] + $U['penize'] + $U['jidlo'];
-    // return $penize + $karma + $jidlo;
 }
