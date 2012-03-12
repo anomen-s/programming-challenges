@@ -9,7 +9,8 @@ function ip_check()
 // echo $TODAY_FILE;
 
  if (file_exists ($TODAY_FILE)) {
-    $data  = file($TODAY_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $fdata  = file($TODAY_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $data = array_count_values($fdata);
  }
  else {
     $data = array();
@@ -17,16 +18,15 @@ function ip_check()
 
 // echo "\nRES = ";
  
- if (!in_array($ip, $data)) {
+ if (!isset($data[$ip]) || ($data[$ip] < MAX_TRIES_PER_DAY)) {
   // ok 
-//    echo 'writing to file';
     $fh = fopen($TODAY_FILE, 'a');
     fwrite($fh, "$ip\n");
     fclose($fh);
   
     return true;
  } else {
-    return false;
     // error - forbidden
+    return false;
  }
 }

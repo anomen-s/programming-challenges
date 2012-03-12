@@ -1,11 +1,8 @@
-<html>
-<head>
- <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
- <link rel='stylesheet' type='text/css' href='styles.css' />
-</head>
-<body>
-
 <?php
+
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Fri, 01 Jan 2010 05:00:00 GMT");
+header("Pragma: no-cache");
 
 require_once('toolbox.php');
 
@@ -21,6 +18,13 @@ foreach ($params as $p) {
 }
 
 ?>
+<html>
+<head>
+ <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+ <link rel='stylesheet' type='text/css' href='styles.css' />
+</head>
+<body>
+
 
 <?php if (empty($U['klice'])) { ?>
 <form method="post">

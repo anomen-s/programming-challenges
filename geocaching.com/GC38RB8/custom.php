@@ -6,6 +6,9 @@ define ('PASSWORD', "my secRet passw0rd_1");
 // adresar pro docasne soubory (ip check)
 define ('TMPDIR', '/tmp');
 
+// pocet pokusu za den
+define ('MAX_TRIES_PER_DAY', '2');
+
 // velikost obrazku (perky)
 define("PERK_WIDTH", 140);
 define("PERK_HEIGHT", 140);
