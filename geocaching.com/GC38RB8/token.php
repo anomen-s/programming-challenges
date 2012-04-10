@@ -62,12 +62,11 @@ function aes_decrypt($pass, $cipher)
     return $aes->decrypt($cipher);
 }
 
-function getToken($U, $perky)
+function getToken($U)
 {
-
-  $perkyStr = implode('!',$perky);
+  $perkyStr = implode('!',$U['perky']);
   $seed = str_pad('', SEED_LENGTH, 'x');
-  $plain = "$seed!${U['login']}!${U['karma']}!${U['penize']}!${U['jidlo']}!$perkyStr";
+  $plain = "$seed!${U['login']}!${U['karma']}!${U['penize']}!${U['jidlo']}!${U['skore']}!$perkyStr";
   while (strlen($plain) % 3 != 0) { // pad to base64 block
    $plain .= '!';
   }
@@ -108,6 +107,7 @@ function decodeToken($token)
   $U['karma'] = array_shift($token_list);
   $U['penize'] = array_shift($token_list);
   $U['jidlo'] = array_shift($token_list);
+  $U['skore'] = array_shift($token_list);
   foreach($token_list as $k=> $v) {
     if (empty($v)) {
        unset($token_list[$k]);

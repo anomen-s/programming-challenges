@@ -77,20 +77,22 @@ if (!empty($U['klice'])) {
   echo "<div id=\"result\">\n";
 
 if (!ip_check()) {
-    echo "<span style=\"color:red;font-weight:bold\">OPAKOVANY POKUS</span>";
+	echo "<span style=\"color:red;font-weight:bold\">OPAKOVANY POKUS</span>";
+    if (LIMIT_TRIES_PER_DAY) {
+	echo "</p></body></html>\n";
+	die;
+    }
 }
 
 //	  echo "volam  ohodnot_hrace(${U['klice']})"; // DEBUG
-  $perky = ohodnot_hrace($U['klice']);
-  foreach($perky as $perk => $val) {
-	if (!empty($val)) {
-		echo "<br /><img src='perky/perk_$perk.jpg'/>\n";
-	}
+  ohodnot_hrace($U);
+  foreach($U['perky'] as $perk) {
+	echo "<br /><img src='perky/perk_$perk.jpg'/>\n";
   }
 
   echo "<hr /> odkaz pro zalogovani:<br />\n";
   
-  $token_b64 = getToken($U, array_keys_true($perky));
+  $token_b64 = getToken($U);
   $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}" .  str_replace('index.php','cert.php', $_SERVER['SCRIPT_NAME']) . "?$token_b64";
 //  $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}/~guppy/fallout/cert.php?$token_b64";
   

@@ -12,7 +12,6 @@ if (empty($_SERVER["QUERY_STRING"])) {
 $token = $_SERVER["QUERY_STRING"];
 
 $U = decodeToken($token);
-$skore = spocti_skore($U);
 
 $certimg = imagecreatetruecolor(PERK_WIDTH*3+100, PERK_HEIGHT*3+100);
 $bg = imagecolorallocate($certimg, 0xd0, 0xd0, 0xd0);
@@ -38,7 +37,7 @@ $text_color = imagecolorallocate($certimg, 0x00, 0xff, 0x00);
 $ii = chr(0xED);
 imagestring($certimg, 5, 20, 10, "${U[login]}", $text_color);
 imagestring($certimg, 5, 20, 30, "Pen${ii}ze: ${U[penize]}   |   Karma: ${U[karma]}   |    J${ii}dlo: ${U[jidlo]}", $text_color);
-imagestring($certimg, 5, 180, 10, "Skore $skore", $text_color);
+imagestring($certimg, 5, 180, 10, "Skore ${U['skore']}", $text_color);
 
 //imagejpeg($certimg, NULL, 100);
 imagepng($certimg);
