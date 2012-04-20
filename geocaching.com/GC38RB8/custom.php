@@ -10,7 +10,7 @@ define ('TMPDIR', '/tmp');
 define ('LIMIT_TRIES_PER_DAY', false);
 
 // pocet pokusu za den
-define ('MAX_TRIES_PER_DAY', '2');
+define ('MAX_TRIES_PER_DAY', 2);
 
 
 // velikost obrazku (perky)
@@ -23,7 +23,10 @@ define("PERK_HEIGHT", 140);
  */
 function over_platnost($vstup)
 {
-  over_poradi($vstup, 1, 3, 9);
+  $v = true;
+  $v &= over_poradi($vstup, 1, 3, 9);
+  
+  return $v;
 }
 
 

@@ -13,25 +13,6 @@ function base64_url_decode($input) {
 }
 
 
-function sha1_encrypt($pass, $plain)
-{
- $i = 0;
- $len = strlen($plain);
- $cipher = $pass;
- $result = '';
- while ($i < $len) {
-	$cipher = sha1("/$cipher/$i/$pass/", true);
-#	echo "key: /$cipher/$i/$pass/<br />\n";
-	$pool = strlen($cipher); // 20
-	$chunk = substr($plain, $i, $pool);
-	$i += $pool;
-	$r = $cipher ^ $chunk;
-	$result .= $r;
- }
- return $result;
-}
-
-
 function aes_encrypt($pass, $plaintext)
 {
     $aes = new Crypt_AES(CRYPT_AES_MODE_CTR);
@@ -99,7 +80,7 @@ function decodeToken($token)
     readfile('img/no.png');
     die;
   }
-  header('X-Token: ' . $token_dec);
+  header('X-Token: ' . $token_check);
   
   $token_list = explode($sep,$token_dec);
   $U['seed'] = array_shift($token_list);
@@ -108,6 +89,8 @@ function decodeToken($token)
   $U['penize'] = array_shift($token_list);
   $U['jidlo'] = array_shift($token_list);
   $U['skore'] = array_shift($token_list);
+
+  // remove empty items used as padding
   foreach($token_list as $k=> $v) {
     if (empty($v)) {
        unset($token_list[$k]);
