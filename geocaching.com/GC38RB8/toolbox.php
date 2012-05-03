@@ -43,7 +43,7 @@ function parse_keys($klice_str)
 
 function ohodnot_hrace($klice_str)
 {
-  $klice = $parse_keys($U['klice']);
+  $klice = parse_keys($U['klice']);
 
   $U['perky'] = vyhodnot_klice($klice);
   
@@ -52,7 +52,7 @@ function ohodnot_hrace($klice_str)
    echo "cheater";
    die();
   }
-  $U['skore'] = spocti_skore($U);
+  $U['skore'] = spocti_skore($U, $klice);
 }
 
 /**

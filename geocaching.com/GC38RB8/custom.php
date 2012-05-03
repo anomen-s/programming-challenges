@@ -79,7 +79,7 @@ function vyhodnot_klice($vstup)
 /**
  * spocita body
  */
-function spocti_skore($U)
+function spocti_skore($U, $klice)
 {
     return count($U['perky']) + $U['karma'] + $U['penize'] + $U['jidlo'];
 }
