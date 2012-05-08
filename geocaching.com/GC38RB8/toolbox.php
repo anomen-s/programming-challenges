@@ -58,7 +58,7 @@ function ohodnot_hrace($klice_str)
 /**
  * Vrati pole obsahujici klice vstupniho pole, ktere maji hodnotu true.
  *
- * Example: 
+ * Example:
  * $v = array( 1=>true, 2=>false, 13=>true);
  * $res = array_keys_true($v);
  * // $res == array(1, 13);

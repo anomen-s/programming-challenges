@@ -23,6 +23,7 @@ define("PERK_HEIGHT", 140);
  */
 function over_platnost($vstup)
 {
+ return true;
   $v = true;
   $v &= over_poradi($vstup, 1, 3, 9);
   
@@ -60,7 +61,7 @@ function vyhodnot_klice($vstup)
 	if (in_array(1, $vstup) && in_array(9, $vstup)) {
 
 	    // odstranit 101; mazani je komplikovane
-	    $key101 = array_search(101, $vystup)
+	    $key101 = array_search(101, $vystup);
 	    if ($key101 !== FALSE) {
 		unset($vystup[$key101]);
 	    }

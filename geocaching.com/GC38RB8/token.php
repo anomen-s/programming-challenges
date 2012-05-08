@@ -2,7 +2,7 @@
 
 require_once('phpseclib/AES.php');
 
-define(SEED_LENGTH, 2);
+define('SEED_LENGTH', 2);
 
 function base64_url_encode($input) {
     return strtr(base64_encode($input), '+', '_');
@@ -11,7 +11,6 @@ function base64_url_encode($input) {
 function base64_url_decode($input) {
     return base64_decode(strtr($input, '_', '+'));
 }
-
 
 function aes_encrypt($pass, $plaintext)
 {
@@ -49,12 +48,13 @@ function getToken($U)
   $seed = str_pad('', SEED_LENGTH, 'x');
   $plain = "$seed!${U['login']}!${U['karma']}!${U['penize']}!${U['jidlo']}!${U['skore']}!$perkyStr";
   while (strlen($plain) % 3 != 0) { // pad to base64 block
-   $plain .= '!';
+   $plain .= ' ';
   }
   $sha = sha1(PASSWORD . $plain, true);
   for ($i = 0; $i < SEED_LENGTH; $i++) {
     $plain{$i} = $sha{$i};
   }
+ echo " XXX $plain XXX";
 
   $token = aes_encrypt(PASSWORD, $plain);
   $token_b64 = base64_url_encode($token);
@@ -72,6 +72,7 @@ function decodeToken($token)
   for ($i = 0; $i < SEED_LENGTH; $i++) {
     $token_check{$i} = 'x';
   }
+    header('X-Token: '.$token_check );
   $sha = sha1(PASSWORD . $token_check, true);
 
   if (substr($token_dec,0,SEED_LENGTH) != substr($sha,0,SEED_LENGTH)) {
@@ -82,20 +83,14 @@ function decodeToken($token)
   }
   header('X-Token: ' . $token_check);
   
-  $token_list = explode($sep,$token_dec);
-  $U['seed'] = array_shift($token_list);
+  $token_list = explode($sep, trim($token_check));
+  array_shift($token_list); // = xx
   $U['login'] = array_shift($token_list);
   $U['karma'] = array_shift($token_list);
   $U['penize'] = array_shift($token_list);
   $U['jidlo'] = array_shift($token_list);
   $U['skore'] = array_shift($token_list);
 
-  // remove empty items used as padding
-  foreach($token_list as $k=> $v) {
-    if (empty($v)) {
-       unset($token_list[$k]);
-    }
-  }
   $U['perky'] = $token_list;
   
   return $U;
