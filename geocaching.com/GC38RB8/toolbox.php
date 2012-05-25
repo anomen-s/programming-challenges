@@ -5,7 +5,7 @@ require_once('token.php');
 require_once('ipcheck.php');
 
 
-function over_poradi()
+function PORADI()
 {
     $numargs = func_num_args();
     if ($numargs < 3) {
@@ -43,16 +43,16 @@ function parse_keys($klice_str)
 
 function ohodnot_hrace($klice_str)
 {
-  $klice = parse_keys($U['klice']);
+  $U['keylist'] = parse_keys($U['klice']);
 
-  $U['perky'] = vyhodnot_klice($klice);
+  vyhodnot_klice($U);
   
   if(!over_platnost($U)) {
    /// cheater
    echo "cheater";
    die();
   }
-  $U['skore'] = spocti_skore($U, $klice);
+  spocti_skore($U);
 }
 
 /**
