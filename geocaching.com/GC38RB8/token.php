@@ -54,7 +54,6 @@ function getToken($U)
   for ($i = 0; $i < SEED_LENGTH; $i++) {
     $plain{$i} = $sha{$i};
   }
- echo " XXX $plain XXX";
 
   $token = aes_encrypt(PASSWORD, $plain);
   $token_b64 = base64_url_encode($token);

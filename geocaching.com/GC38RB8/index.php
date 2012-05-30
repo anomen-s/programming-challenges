@@ -87,7 +87,7 @@ foreach ($params as $p) {
 
   echo "<hr /> odkaz pro zalogovani:<br />\n";
 
- echo "<pre>U=";print_r($U);echo "</pre>";
+ //echo "<pre>U=";print_r($U);echo "</pre>";
    
   $token_b64 = getToken($U);
   $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}"
