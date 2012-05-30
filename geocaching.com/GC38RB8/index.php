@@ -71,7 +71,7 @@ foreach ($params as $p) {
  echo "<div id=\"result\">\n";
 
  if (!ip_check()) {
-	echo "<span style=\"color:red;font-weight:bold\">OPAKOVANY POKUS</span>";
+	echo "<p><span style=\"color:red;font-weight:bold\">OPAKOVANY POKUS</span></p>\n";
     if (LIMIT_TRIES_PER_DAY) {
 	echo "</div></body></html>\n";
 	die;
@@ -86,7 +86,9 @@ foreach ($params as $p) {
   }
 
   echo "<hr /> odkaz pro zalogovani:<br />\n";
-  
+
+ echo "<pre>U=";print_r($U);echo "</pre>";
+   
   $token_b64 = getToken($U);
   $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}"
        . str_replace('index.php','cert.php', $_SERVER['SCRIPT_NAME']) 

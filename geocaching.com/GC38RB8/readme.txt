@@ -27,3 +27,8 @@ vypis odkaz na certifikat
 
 == certifikat ==
 
+
+== příklad ==
+ 1 -> 5 -> 8 -> 9
+      |         ^
+      \-> 6 ----/
