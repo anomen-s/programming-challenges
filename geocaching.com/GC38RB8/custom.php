@@ -1,10 +1,9 @@
 <?php
 
-// heslo pro generovani certifikatu
-define ('PASSWORD', "my secRet passw0rd_1");
+require_once('config.php');
 
 // adresar pro docasne soubory (ip check)
-define ('TMPDIR', '/tmp');
+define ('TMPDIR', './ipcheck');
 
 // omezit pocet pokusu za den
 define ('LIMIT_TRIES_PER_DAY', false);
@@ -47,11 +46,6 @@ function over_platnost(&$U)
  */
 function vyhodnot_klice(&$U)
 {
-	$vstup = $U['keylist'];
-
-	$U['perky'] = array();
-	$vystup = $U['perky'];
-
 	// pokud uziv. zadal 1 dej perk 102
 	if (MA_KLICE($U,1)) {
 	    PRIDEJ_PERK($U, '102');

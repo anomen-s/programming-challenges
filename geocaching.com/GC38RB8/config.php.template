@@ -1,0 +1,9 @@
+<?php
+
+$DB_HOST='localhost';
+$DB_USER='user';
+$DB_PASS='pass';
+$DB_DB='db';
+
+// heslo pro generovani certifikatu
+define ('PASSWORD', "my secRet passw0rd_1");

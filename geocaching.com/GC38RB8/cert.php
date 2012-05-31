@@ -36,8 +36,8 @@ for ($i=2; $i < 8; $i ++) {
     imagestring($certimg, 5, PERK_WIDTH * 3 / 2, PERK_HEIGHT * ( $i / 3) ,  'TEST', $red_color);
 }
 
-imagestring($certimg, 5, 20, 10, "${U[login]}", $red_color);
-imagestring($certimg, 5, 20, 30, "Pen${ii}ze: ${U[penize]}   |   Karma: ${U[karma]}   |    J${ii}dlo: ${U[jidlo]}", $text_color);
+imagestring($certimg, 5, 20, 10, "${U['login']}", $red_color);
+imagestring($certimg, 5, 20, 30, "Pen${ii}ze: ${U['penize']}   |   Karma: ${U['karma']}   |    J${ii}dlo: ${U['jidlo']}", $text_color);
 imagestring($certimg, 5, 180, 10, "Skore ${U['skore']}", $text_color);
 
 //imagejpeg($certimg, NULL, 90);

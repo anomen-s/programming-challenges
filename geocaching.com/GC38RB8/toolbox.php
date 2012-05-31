@@ -79,6 +79,7 @@ function ohodnot_hrace(&$U)
 {
   $U['keylist'] = parse_keys($U['klice']);
 
+  $U['perky'] = array();
   vyhodnot_klice($U);
 
   if(!over_platnost($U)) {
