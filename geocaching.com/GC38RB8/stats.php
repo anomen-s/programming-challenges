@@ -13,11 +13,11 @@ Header('X-Status: Mysql Connected successfully');
 
 mysql_select_db($DB_DB, $link) or die("Unable to select database: ". mysql_error());
 
-if ($_REQUEST['db_create'] == "1234") {
+if ($_REQUEST['db_create'] == $DB_CREATE) {
   echo 'creating db<br />';
 
  $result = mysql_query('DROP TABLE  fallout_stats')
-	or die("Unable to drop table: ". mysql_error());;
+	or die("Unable to drop table: ". mysql_error());
 
  $result = mysql_query('
 	CREATE TABLE IF NOT EXISTS fallout_stats (
