@@ -3,7 +3,7 @@
 require_once('config.php');
 
 // adresar pro docasne soubory (ip check)
-define ('TMPDIR', './ipcheck');
+define ('TMPDIR', './data');
 
 // omezit pocet pokusu za den
 define ('LIMIT_TRIES_PER_DAY', false);

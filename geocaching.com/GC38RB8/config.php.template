@@ -1,10 +1,12 @@
 <?php
 
+// databaze
 $DB_HOST='localhost';
 $DB_USER='user';
 $DB_PASS='pass';
 $DB_DB='db';
 
+// heslo pro vytvoreni db schema
 $DB_CREATE='pass';
 
 // heslo pro generovani certifikatu

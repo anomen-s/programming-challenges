@@ -51,15 +51,15 @@ function dbstats_access(&$U)
     foreach ($params as $p) {
 	$sql .= ", $p";
     }
-    $sql .= ") \nVALUES (now(), '${_SERVER['REMOTE_ADDR']}', '${_SERVER['HTTP_USER_AGENT']}', ${U['invalid']} ";
+    $sql .= ") \nVALUES (now(), '${_SERVER['REMOTE_ADDR']}', '${_SERVER['HTTP_USER_AGENT']}', 'submit' ";
     foreach ($params as $p) {
 	$sql .= ", '";
 	$sql .= $U["${p}_mysql"] ;
 	$sql .= "'";
     }
     $sql .= ")";
-//    echo $sql;
     
+    sql_log($sql);
     $result = mysql_query($sql)
 	or die("Unable to execute insert: ". mysql_error());
     
@@ -68,11 +68,11 @@ function dbstats_access(&$U)
     return $id;
 }
 
-function dbstats_update(&$U, $cert)
+function dbstats_update(&$U, $cert, $invalid)
 {
     $id = $U['id'];
-    $invalid = empty($U['invalid']) ? 'null' : "'${U['invalid']}'";
-    $perky = implode(',', $U['perky']);
+    $invalid = empty($invalid) ? 'null' : "'$invalid'";
+    $perky = implode(' ', $U['perky']);
     $sql = " UPDATE fallout_stats ";
     $sql .= " SET ";
     $sql .= "  skore = ${U['skore']}, ";
@@ -81,9 +81,18 @@ function dbstats_update(&$U, $cert)
     $sql .= "  perky = '$perky'" ;
     
     $sql .= " WHERE (skore IS NULL) AND (id = $id) ";
-    
+
+    sql_log($sql);
     $result = mysql_query($sql)
 	or die("Unable to execute update: ". mysql_error());
     
 }
 
+function sql_log($sql)
+{
+ $SQL_FILE= TMPDIR . "/sql.txt";
+
+ $fh = fopen($SQL_FILE, 'a');
+ fwrite($fh, "$sql\n");
+ fclose($fh);
+}

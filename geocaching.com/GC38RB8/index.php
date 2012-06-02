@@ -5,6 +5,7 @@ header("Expires: Fri, 01 Jan 2010 05:00:00 GMT");
 header("Pragma: no-cache");
 
 require_once('toolbox.php');
+require_once('stats.php');
 
 $U = array();
 $params = array('login','klice','penize','jidlo','karma');
@@ -68,10 +69,16 @@ foreach ($params as $p) {
 
 <?php } else {
 
+ dbstats_access($U);
+ 
+ // TODO: check integers
+ //	dbstats_update($U, '', 'invalid values');
+
  echo "<div id=\"result\">\n";
 
  if (!ip_check()) {
 	echo "<p><span style=\"color:red;font-weight:bold\">OPAKOVANY POKUS</span></p>\n";
+	dbstats_update($U, '', 'retry_limit_reached');
     if (LIMIT_TRIES_PER_DAY) {
 	echo "</div></body></html>\n";
 	die;
@@ -90,6 +97,9 @@ foreach ($params as $p) {
  //echo "<pre>U=";print_r($U);echo "</pre>";
    
   $token_b64 = getToken($U);
+  
+  dbstats_update($U, $token_b64, '');
+  
   $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}"
        . str_replace('index.php','cert.php', $_SERVER['SCRIPT_NAME']) 
        . "?$token_b64";

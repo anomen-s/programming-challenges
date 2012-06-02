@@ -10,6 +10,8 @@ pole $U:
 - karma
 - keylist - list zadanych klicu, indexovano poradim
 - perky - pole perku, vypocitano (fce vyhodnot_klice)
+- invalid - stav (posledni zjistena chyba)
+- id - id do databaze
 
 kontrola IP (ip_check)
 
