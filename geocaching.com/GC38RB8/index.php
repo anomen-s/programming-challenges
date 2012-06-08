@@ -5,7 +5,6 @@ header("Expires: Fri, 01 Jan 2010 05:00:00 GMT");
 header("Pragma: no-cache");
 
 require_once('toolbox.php');
-require_once('stats.php');
 
 $U = array();
 $params = array('login','klice','penize','jidlo','karma');

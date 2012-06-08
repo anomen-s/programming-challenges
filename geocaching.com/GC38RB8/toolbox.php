@@ -3,6 +3,7 @@
 require_once('custom.php');
 require_once('token.php');
 require_once('ipcheck.php');
+require_once('stats.php');
 
 
 function PORADI()
@@ -84,6 +85,7 @@ function ohodnot_hrace(&$U)
 
   if(!over_platnost($U)) {
    /// cheater
+   dbstats_update($U, '', 'cheater');
    echo "cheater";
    die();
   }
