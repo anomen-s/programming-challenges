@@ -25,10 +25,10 @@ function over_platnost(&$U)
   $vstup = $U['keylist'];
   $v = true;
   $v &= PORADI($vstup, 1,  5, 9);
-  if (in_array(6, $vstup)) {
+  if (MA_KLICE($U,6)) {
     $v &= PORADI($vstup, 5,  6, 9);
   } 
-  else if (in_array(8, $vstup)) {
+  else if (MA_KLICE($U,8)) {
     $v &= PORADI($vstup, 5,  8, 9);
   }
   else {
@@ -81,7 +81,8 @@ function spocti_skore(&$U)
     
     $sk = 100*count($U['perky']) + 10*$U['karma'] + 20*$U['penize'] + $U['jidlo'];
     
-    if (in_array(6, $U['keylist'])) {
+    // pokud prosel stage 6, pridej bodu
+    if (MA_KLICE($U,6)) {
 	$sk +=200;
     }
 
