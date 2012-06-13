@@ -11,6 +11,9 @@ define ('LIMIT_TRIES_PER_DAY', false);
 // pocet pokusu za den
 define ('MAX_TRIES_PER_DAY', 2);
 
+// pokud je true negeneruje se cheaterum skore, perky,...
+define ('KICK_CHEATERS', true);
+
 
 // velikost obrazku (perky)
 define("PERK_WIDTH", 140);

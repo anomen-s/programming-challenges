@@ -12,6 +12,7 @@ pole $U:
 - perky - pole perku, vypocitano (fce vyhodnot_klice)
 - invalid - stav (posledni zjistena chyba)
 - id - id do databaze
+- cheater - pocet nepravostí nalezený fcí over_platnost
 
 kontrola IP (ip_check)
 

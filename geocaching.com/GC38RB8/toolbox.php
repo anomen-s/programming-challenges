@@ -86,8 +86,10 @@ function ohodnot_hrace(&$U)
   if(!over_platnost($U)) {
    /// cheater
    dbstats_update($U, '', 'cheater');
-   echo "cheater";
-   die();
+   echo "<p>Cheater !!!</p>\n";
+   if (KICK_CHEATERS) {
+	die();
+   }
   }
   spocti_skore($U);
 }

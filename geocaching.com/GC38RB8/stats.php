@@ -72,15 +72,17 @@ function dbstats_update(&$U, $cert, $invalid)
 {
     $id = $U['id'];
     $invalid = empty($invalid) ? 'null' : "'$invalid'";
-    $perky = implode(' ', $U['perky']);
+    $cert = empty($cert) ? 'null' : "'$cert'";
+    $skore = empty($U['skore']) ? 'null' : "'${U['skore']}'";
+    $perky = empty($U['perky']) ? 'null' : "'" . implode(' ', $U['perky']) . "'" ;
     $sql = " UPDATE fallout_stats ";
     $sql .= " SET ";
-    $sql .= "  skore = ${U['skore']}, ";
-    $sql .= "  cert = '$cert', ";
-    $sql .= "  invalid = $invalid, ";
-    $sql .= "  perky = '$perky'" ;
+    $sql .= " invalid = $invalid, ";
+    $sql .= " cert = $cert, ";
+    $sql .= " skore = $skore, ";
+    $sql .= " perky = $perky " ;
     
-    $sql .= " WHERE (skore IS NULL) AND (id = $id) ";
+    $sql .= " WHERE id = $id ";
 
     sql_log($sql);
     $result = mysql_query($sql)
@@ -93,6 +95,6 @@ function sql_log($sql)
  $SQL_FILE= TMPDIR . "/sql.txt";
 
  $fh = fopen($SQL_FILE, 'a');
- fwrite($fh, "$sql\n");
+ fwrite($fh, "$sql;\n");
  fclose($fh);
 }
