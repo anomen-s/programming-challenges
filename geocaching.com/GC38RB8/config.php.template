@@ -1,5 +1,8 @@
 <?php
 
+// pouzivat databazi ?
+define ('HAVE_MYSQL', true);
+
 // databaze
 $DB_HOST='localhost';
 $DB_USER='user';

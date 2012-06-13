@@ -2,24 +2,27 @@
 
 require_once('config.php');
 
-$link = mysql_connect ($DB_HOST, $DB_USER, $DB_PASS);
+if (HAVE_MYSQL) {
+  $link = mysql_connect ($DB_HOST, $DB_USER, $DB_PASS);
 
-if (!$link) {
+  if (!$link) {
     echo 'Could not connect to database: ' . mysql_error();
     die();
-}
+  }
 
-Header('X-Status: Mysql Connected successfully');
+  Header('X-Status: Mysql Connected successfully');
 
-mysql_select_db($DB_DB, $link) or die("Unable to select database: ". mysql_error());
+  mysql_select_db($DB_DB, $link) or die("Unable to select database: ". mysql_error());
 
-if ($_REQUEST['db_create'] == $DB_CREATE) {
-  echo 'creating db<br />';
 
- $result = mysql_query('DROP TABLE  fallout_stats')
+
+  if ($_REQUEST['db_create'] == $DB_CREATE) {
+    echo 'creating db<br />';
+
+   $result = mysql_query('DROP TABLE  fallout_stats')
 	or die("Unable to drop table: ". mysql_error());
 
- $result = mysql_query('
+   $result = mysql_query('
 	CREATE TABLE IF NOT EXISTS fallout_stats (
 	id      integer not null AUTO_INCREMENT,
 	cas	datetime,
@@ -37,9 +40,10 @@ if ($_REQUEST['db_create'] == $DB_CREATE) {
 	PRIMARY KEY (id)
 	)')
 	or die("Unable to create table ". mysql_error());
-}
+  }
 
-$res=mysql_query("select count(*) from fallout_stats");
+  //$res=mysql_query("select count(*) from fallout_stats");
+}
 
 function dbstats_access(&$U)
 {
@@ -60,10 +64,15 @@ function dbstats_access(&$U)
     $sql .= ")";
     
     sql_log($sql);
-    $result = mysql_query($sql)
+    if (HAVE_MYSQL) {
+      $result = mysql_query($sql)
 	or die("Unable to execute insert: ". mysql_error());
     
-    $id = mysql_insert_id();
+      $id = mysql_insert_id();
+    } 
+    else {
+      $id = rand(1, 10000000);
+    }  
     $U['id'] = $id;
     return $id;
 }
@@ -85,8 +94,10 @@ function dbstats_update(&$U, $cert, $invalid)
     $sql .= " WHERE id = $id ";
 
     sql_log($sql);
-    $result = mysql_query($sql)
+    if (HAVE_MYSQL) {
+      $result = mysql_query($sql)
 	or die("Unable to execute update: ". mysql_error());
+    }
     
 }
 
