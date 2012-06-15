@@ -15,9 +15,11 @@ define ('MAX_TRIES_PER_DAY', 2);
 define ('KICK_CHEATERS', true);
 
 
-// velikost obrazku (perky)
+// velikost obrazku (perky) a pocet sloupcu
 define("PERK_WIDTH", 140);
 define("PERK_HEIGHT", 140);
+define("PERK_COLS", 3);
+define("PERK_ROWS", 3);
 
 
 /**
