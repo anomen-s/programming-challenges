@@ -13,7 +13,9 @@ div#input_div {
     
 }
 
-
+div#perky_preview {
+    width: 500px;
+ }
 
 div#result {
 

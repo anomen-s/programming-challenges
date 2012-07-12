@@ -16,7 +16,7 @@ $U = decodeToken($token);
 $certimg = imagecreatetruecolor(PERK_WIDTH*PERK_COLS+100, PERK_HEIGHT*PERK_ROWS+100);
 $bg = imagecolorallocate($certimg, 0xd0, 0xd0, 0xd0);
 $red_color = imagecolorallocate($certimg, 0xff, 0x00, 0x00);
-$text_color = imagecolorallocate($certimg, 0x00, 0xff, 0x00);
+$text_color = imagecolorallocate($certimg, 0x00, 0x7f, 0x00);
 $ii = chr(0xED);
 
 imagefill($certimg, 0, 0, $bg);

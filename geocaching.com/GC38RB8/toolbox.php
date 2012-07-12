@@ -8,15 +8,25 @@ require_once('stats.php');
 
 function PORADI()
 {
+
     $numargs = func_num_args();
     if ($numargs < 3) {
+	echo "spatne parametry PORADI!";
 	return false;
     }
-    $vstup = func_get_arg(0);
 
-    $current = 1;
-    $current_val = func_get_arg($current);
+    $poradi = func_get_args();
+    $vstup = array_shift($poradi);
+    
+    $prunik = array_intersect($zadane, $poradi);
+    foreach ($prunik as $v) {
+    }
+
+//    $current = 1;
+//    $current_val = func_get_arg($current);
+    
     foreach ($vstup as $v) {
+	if (in_array($v, )) {    
 	    if ($v == $current_val) {
 		$current ++;
 		if ($current >= $numargs) {
@@ -24,6 +34,10 @@ function PORADI()
 		}
 		$current_val = func_get_arg($current);
 	    }
+	}
+	else {
+	}
+	    
      }
      return false;
 }

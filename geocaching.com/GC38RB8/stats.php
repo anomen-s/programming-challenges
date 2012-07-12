@@ -28,15 +28,15 @@ if (HAVE_MYSQL) {
 	cas	datetime,
 	invalid	varchar(200),
 	login	varchar(100),
-	klice	varchar(200),
+	klice	varchar(300),
 	penize	integer,
 	jidlo	integer,
 	karma	integer,
-	perky	varchar(200),
+	perky	varchar(300),
 	skore	integer,
 	ip	varchar(20),
 	ua	varchar(300),
-	cert	varchar(200),
+	cert	varchar(500),
 	PRIMARY KEY (id)
 	)')
 	or die("Unable to create table ". mysql_error());
@@ -49,7 +49,12 @@ function dbstats_access(&$U)
 {
     $params = array('login','klice','penize','jidlo','karma');
     foreach ($params as $p) {
-	$U["${p}_mysql"] = mysql_real_escape_string($U["${p}"]);
+        if (HAVE_MYSQL) {
+	    $U["${p}_mysql"] = mysql_real_escape_string($U["${p}"]);
+	}
+	else {
+	    $U["${p}_mysql"] = $U["${p}"];
+	}
     }
     $sql = 'INSERT INTO fallout_stats (cas, ip, ua, invalid ';
     foreach ($params as $p) {

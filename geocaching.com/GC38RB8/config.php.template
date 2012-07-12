@@ -1,5 +1,8 @@
 <?php
 
+// pouzivat debug rezim
+define ('HAVE_DEBUG', true);
+
 // pouzivat databazi ?
 define ('HAVE_MYSQL', true);
 

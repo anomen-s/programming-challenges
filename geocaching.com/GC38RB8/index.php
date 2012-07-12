@@ -87,9 +87,11 @@ foreach ($params as $p) {
 //  echo "volam  ohodnot_hrace(${U['klice']})"; // DEBUG
   ohodnot_hrace($U);
 
+  echo '<div id="perky_preview">';
   foreach($U['perky'] as $perk) {
-	echo "<br /><img src='perky/perk_$perk.jpg'/>\n";
+	echo "<img src='perky/perk_$perk.jpg'/>\n";
   }
+  echo '</div>';
 
   echo "<hr /> odkaz pro zalogovani:<br />\n";
 
@@ -102,6 +104,13 @@ foreach ($params as $p) {
   $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}"
        . str_replace('index.php','cert.php', $_SERVER['SCRIPT_NAME']) 
        . "?$token_b64";
+       
+
+    if (HAVE_DEBUG) {
+	echo "<pre>";
+	print_r($U);
+	echo "</pre>";
+    }
 //  $script="http://${_SERVER['SERVER_NAME']}:${_SERVER['SERVER_PORT']}/~guppy/fallout/cert.php?$token_b64";
   
   //TEST
