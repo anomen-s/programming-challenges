@@ -5,10 +5,12 @@ require_once('token.php');
 require_once('ipcheck.php');
 require_once('stats.php');
 
-
+/**
+ * overi poradi klicu.
+ *
+ */
 function PORADI()
 {
-
     $numargs = func_num_args();
     if ($numargs < 3) {
 	echo "spatne parametry PORADI!";
@@ -17,29 +19,19 @@ function PORADI()
 
     $poradi = func_get_args();
     $vstup = array_shift($poradi);
-    
-    $prunik = array_intersect($zadane, $poradi);
-    foreach ($prunik as $v) {
-    }
-
-//    $current = 1;
-//    $current_val = func_get_arg($current);
-    
+ 
+    $lastpos = -1;
     foreach ($vstup as $v) {
-	if (in_array($v, )) {    
-	    if ($v == $current_val) {
-		$current ++;
-		if ($current >= $numargs) {
-			return true;
+	$pos = array_search($v, $poradi);
+	// pokud je klic v zadanem poradi over jeho index
+	if ($pos !== false) {
+		if ($pos <= $lastpos) {
+		    return false;
 		}
-		$current_val = func_get_arg($current);
-	    }
+		$lastpos = $pos;
 	}
-	else {
-	}
-	    
      }
-     return false;
+     return true;
 }
 
 function PRIDEJ_PERK(&$U)
