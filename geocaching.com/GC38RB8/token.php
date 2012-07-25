@@ -90,7 +90,10 @@ function decodeToken($token)
   $U['jidlo'] = array_shift($token_list);
   $U['skore'] = array_shift($token_list);
 
+  // TODO: check if $token_list is not array('')
   $U['perky'] = $token_list;
+  $U['token'] = $token;
+  $U['token_dec'] = $token_check;
   
   return $U;
 }

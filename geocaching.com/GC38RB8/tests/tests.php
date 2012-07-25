@@ -2,8 +2,9 @@
 function assertEquals($expected, $value)
 {
  if ($expected !== $value) {
-   echo "Received \"" . $value . "\". Instead of expected value: \"" . $expected . "\".\n";
+   echo "\nReceived \"" . $value . "\". Instead of expected value: \"" . $expected . "\".\n";
  }
+// else echo ".";
 }
 
 
