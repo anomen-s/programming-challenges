@@ -24,7 +24,7 @@ imagefill($certimg, 0, 0, $bg);
 
 $i = 0;
 foreach($U['perky'] as $perk) {
- $p = imagecreatefromjpeg("perky/perk_$perk.jpg");
+ $p = imagecreatefromjpeg("perky/$perk.jpg");
  $x = ($i % PERK_COLS) * PERK_WIDTH;
  $y = floor($i / PERK_COLS) * PERK_HEIGHT;
  imagecopy($certimg, $p, $x + 50 , $y + 50, 0, 0,  PERK_WIDTH, PERK_HEIGHT);

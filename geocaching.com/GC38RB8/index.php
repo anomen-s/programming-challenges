@@ -89,7 +89,7 @@ foreach ($params as $p) {
 
   echo '<div id="perky_preview">';
   foreach($U['perky'] as $perk) {
-	echo "<img src='perky/perk_$perk.jpg'/>\n";
+	echo "<img src='perky/$perk.jpg'/>\n";
   }
   echo '</div>';
 
