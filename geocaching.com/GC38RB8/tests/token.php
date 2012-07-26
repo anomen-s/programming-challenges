@@ -1,7 +1,6 @@
 <?php
  require_once "tests.php";
  require_once "../token.php";
- define('PASSWORD', 'pass12345678');
 
 
 $U=array('login'=>'l','karma'=>11, 'penize'=>10,'jidlo'=>3,'skore'=>100);

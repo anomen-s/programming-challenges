@@ -9,9 +9,11 @@ assertTrue(PORADI($zadano, 10, 20, 30, 40));
 assertTrue(PORADI($zadano, 1, 10, 30, 40));
 
 assertFalse(PORADI($zadano, 20, 10, 30, 40));
+assertFalse(PORADI($zadano, 30, 10));
 
 assertTrue(PORADI(array(20), 20, 10, 30, 40));
 assertTrue(PORADI(array(10), 20, 10, 30, 40));
+assertTrue(PORADI(array(10, 40), 20, 10, 30, 40));
 
 
 $U = array();

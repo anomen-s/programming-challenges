@@ -1,4 +1,8 @@
 <?php
+
+define ('HAVE_MYSQL', false);
+define('PASSWORD', 'pass12345678');
+
 function assertEquals($expected, $value)
 {
  if ($expected !== $value) {
