@@ -24,12 +24,18 @@ $ii = chr(0xED);
 imagefill($certimg, 0, 0, $bg);
 
  $bg_img = imagecreatefrompng("img/cert_bg.png");
-// imagecopy($certimg, $bg_img, 0, 0, 0, 0,  $C_WIDTH, $C_HEIGHT);
+ imagecopy($certimg, $bg_img, 0, 0, 0, 0,  $C_WIDTH, $C_HEIGHT);
 
 
 $i = 0;
 foreach($U['perky'] as $perk) {
- $p = imagecreatefromjpeg("perky/$perk.jpg");
+ if (file_exists("perky/$perk.png")) {
+   $p = imagecreatefrompng("perky/$perk.png");
+ }
+ else if (file_exists("perky/$perk.jpg")) {
+   $p = imagecreatefromjpeg("perky/$perk.jpg");
+ }
+
  $x = ($i % PERK_COLS) * (PERK_WIDTH + PERK_PADDING);
  $y = floor($i / PERK_COLS) * (PERK_HEIGHT + PERK_PADDING);
  imagecopy($certimg, $p, $x + CERT_BORDER , $y + CERT_BORDER, 0, 0, PERK_WIDTH, PERK_HEIGHT);
