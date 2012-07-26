@@ -1,2 +1,5 @@
 config.php
+custom.php
+perky/*
+data/*
 vty*

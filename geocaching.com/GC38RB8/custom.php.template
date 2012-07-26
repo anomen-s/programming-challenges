@@ -20,7 +20,8 @@ define("PERK_WIDTH", 140);
 define("PERK_HEIGHT", 140);
 define("PERK_COLS", 3);
 define("PERK_ROWS", 3);
-
+define("CERT_BORDER", 50);
+define("PERK_PADDING", 20);
 
 /**
  * Otestuje platnost zadanych klicu
