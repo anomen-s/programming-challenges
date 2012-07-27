@@ -20,6 +20,8 @@ $bg = imagecolorallocate($certimg, 0xd0, 0xd0, 0xd0);
 $red_color = imagecolorallocate($certimg, 0xff, 0x00, 0x00);
 $text_color = imagecolorallocate($certimg, 0x00, 0x7f, 0x00);
 $ii = chr(0xED);
+$aa = chr(0xE1);
+$oo = chr(0xF3);
 
 imagefill($certimg, 0, 0, $bg);
 
@@ -47,9 +49,9 @@ foreach($U['perky'] as $perk) {
 //    imagestring($certimg, 5, PERK_WIDTH * 3 / 2, PERK_HEIGHT * ( $i / 3) ,  'TEST', $red_color);
 //}
 
-imagestring($certimg, 5, 20, 10, "${U['login']}", $red_color);
-imagestring($certimg, 5, 20, 30, "Pen${ii}ze: ${U['penize']}   |   Karma: ${U['karma']}   |    J${ii}dlo: ${U['jidlo']}", $text_color);
-imagestring($certimg, 5, 180, 10, "Skore ${U['skore']}", $text_color);
+imagestring($certimg, 5, 250, 10, "${U['login']}", $red_color);
+imagestring($certimg, 5, 600, 10, "Z${aa}tky: ${U['penize']}   |   Karma: ${U['karma']}   |    J${ii}dlo: ${U['jidlo']}", $text_color);
+imagestring($certimg, 5, 50, 10, "Sk${oo}re ${U['skore']}", $text_color);
 
 //imagejpeg($certimg, NULL, 90);
 imagepng($certimg);
