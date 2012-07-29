@@ -2,7 +2,7 @@
 
 require_once('phpseclib/AES.php');
 
-define('SEED_LENGTH', 2);
+define('SEED_LENGTH', 3);
 
 function base64_url_encode($input) {
     return strtr(base64_encode($input), '+', '_');
@@ -42,11 +42,32 @@ function aes_decrypt($pass, $cipher)
     return $aes->decrypt($cipher);
 }
 
+function perkyToStr($U)
+{
+  $res = '';
+  foreach ($U['perky'] as $perk) {
+     $i = substr($perk,0,3);
+     $res .= $i;
+  }
+  return $res;
+}
+
+function StrToPerky($strlist)
+{
+ $perky = array();
+ $count = strlen($strlist) / 3;
+ for ($i = 0; $i < $count; $i++) {
+    $perky[] = substr($strlist, $i*3, 3);
+ }
+ //print_r($perky);
+ return $perky;
+}
+
 function getToken($U)
 {
-  $perkyStr = implode('!',$U['perky']);
+  $perkyStr = perkyToStr($U);
   $seed = str_pad('', SEED_LENGTH, 'x');
-  $plain = "$seed!${U['login']}!${U['karma']}!${U['penize']}!${U['jidlo']}!${U['skore']}!$perkyStr";
+  $plain = "$seed${U['login']}!${U['karma']}!${U['penize']}!${U['jidlo']}!${U['skore']}!$perkyStr";
   while (strlen($plain) % 3 != 0) { // pad to base64 block
    $plain .= ' ';
   }
@@ -65,13 +86,12 @@ function decodeToken($token)
   $U = array();
   $token_raw = base64_url_decode($token);
   $token_dec = aes_decrypt(PASSWORD, $token_raw);
-  $sep = $token_dec{SEED_LENGTH};
-  
+
   $token_check = $token_dec;
   for ($i = 0; $i < SEED_LENGTH; $i++) {
     $token_check{$i} = 'x';
   }
-    header('X-Token: '.$token_check );
+  header('X-Token: '.$token_check );
   $sha = sha1(PASSWORD . $token_check, true);
 
   if (substr($token_dec,0,SEED_LENGTH) != substr($sha,0,SEED_LENGTH)) {
@@ -82,18 +102,49 @@ function decodeToken($token)
   }
   header('X-Token: ' . $token_check);
   
-  $token_list = explode($sep, trim($token_check));
-  array_shift($token_list); // = xx
+  $U['token'] = $token;
+  $U['token_dec'] = $token_check;
+  
+  $data = substr($token_check, SEED_LENGTH);
+  $token_list = explode('!', trim($data));
   $U['login'] = array_shift($token_list);
   $U['karma'] = array_shift($token_list);
   $U['penize'] = array_shift($token_list);
   $U['jidlo'] = array_shift($token_list);
   $U['skore'] = array_shift($token_list);
-
-  // TODO: check if $token_list is not array('')
-  $U['perky'] = $token_list;
-  $U['token'] = $token;
-  $U['token_dec'] = $token_check;
+  $p = StrToPerky(array_shift($token_list));
+  $U['perky'] = expandPerks($p);
   
   return $U;
+}
+
+function readPerkdir()
+{
+    $files = array();
+    if ($handle = opendir('perky')) {
+    /* This is the correct way to loop over the directory. */
+    while (false !== ($f = readdir($handle))) {
+        if (strlen($f) >= 7) {
+            $idx = substr($f, 0, 3);
+            $ext = substr($f, -4);
+            $name = substr($f, 0, -4);
+    	    if (($ext == '.jpg') || ($ext == '.png')) {
+        	 $files[$idx] = $name;
+        	 $files[$name] = $name;
+    	    }
+        }
+    }
+    }
+    closedir($handle);
+    return $files;
+}
+
+function expandPerks($perks)
+{
+  $files = readPerkdir();
+  $res = array();
+  foreach ($perks as $p) {
+    $res[] = $files[$p];
+  }
+  return $res;
 }
