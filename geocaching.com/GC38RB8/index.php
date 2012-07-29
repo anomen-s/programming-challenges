@@ -7,15 +7,23 @@ header("Pragma: no-cache");
 require_once('toolbox.php');
 
 $U = array();
-$params = array('login','klice','penize','jidlo','karma');
+$params = array('login'=>'x', 'klice'=>'i', 'penize'=>'i', 'jidlo'=>'i', 'karma'=>'i');
 
-foreach ($params as $p) {
+foreach ($params as $p=>$op) {
     if (isset($_REQUEST[$p])) {
-        $U[$p] = $_REQUEST[$p];
+        $v = $_REQUEST[$p];
+        if (strpos($op, 'x') !== FALSE) {
+          $v = strtr($v, '!', '_');
+        }
+        if (strpos($op, 'i') !== FALSE) {
+	  $v = intval($v);
+        }
+        $U[$p] = $v;
         $U["${p}_safe"] = htmlentities($U[$p], ENT_QUOTES);
         
     }
 }
+$valid = true;
 
 ?>
 <html>
@@ -25,7 +33,7 @@ foreach ($params as $p) {
 </head>
 <body>
 
-<?php if (empty($_REQUEST['form_submit'])) { ?>
+<?php if ($valid && empty($_REQUEST['form_submit'])) { ?>
 
 <form method="post">
 <div id="input_div">
