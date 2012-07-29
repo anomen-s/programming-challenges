@@ -1,5 +1,5 @@
 <?php
-header('Content-type: image/png');
+header('Content-type: image/jpeg');
 
 require_once('toolbox.php');
 
@@ -53,6 +53,6 @@ imagestring($certimg, 5, 250, 10, "${U['login']}", $red_color);
 imagestring($certimg, 5, 600, 10, "Z${aa}tky: ${U['penize']}   |   Karma: ${U['karma']}   |    J${ii}dlo: ${U['jidlo']}", $text_color);
 imagestring($certimg, 5, 50, 10, "Sk${oo}re ${U['skore']}", $text_color);
 
-//imagejpeg($certimg, NULL, 90);
-imagepng($certimg);
+imagejpeg($certimg, NULL, 96);
+//imagepng($certimg);
 imagedestroy($certimg);
