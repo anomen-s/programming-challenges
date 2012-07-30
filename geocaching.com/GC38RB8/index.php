@@ -7,7 +7,7 @@ header("Pragma: no-cache");
 require_once('toolbox.php');
 
 $U = array();
-$params = array('login'=>'x', 'klice'=>'i', 'penize'=>'i', 'jidlo'=>'i', 'karma'=>'i');
+$params = array('login'=>'x', 'klice'=>'', 'penize'=>'i', 'jidlo'=>'i', 'karma'=>'i');
 
 foreach ($params as $p=>$op) {
     if (isset($_REQUEST[$p])) {
@@ -50,7 +50,7 @@ $valid = true;
 </div>
 
 <div id="form_penize">
-<label for="penize">Vydělané peníze:</label>
+<label for="penize">Zbylé zátky:</label>
 <br />
 <input type="text" name="penize" id="penize" value="<?php echo $U['penize_safe']; ?>" />
 </div>
@@ -62,7 +62,7 @@ $valid = true;
 </div>
 
 <div id="form_klice">
-<label for="klice">Nalezené klíče:</label>
+<label for="klice">Nalezené klíče, micro, perky i předměty oddělené čárkou (na pořadí klíčů a micro záleží!):</label>
 <br />
 <textarea cols="30" rows=8" name="klice" id="klice"><?php echo $U['klice_safe'];  ?></textarea>
 </div>

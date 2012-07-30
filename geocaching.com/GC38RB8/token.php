@@ -67,7 +67,7 @@ function getToken($U)
 {
   $perkyStr = perkyToStr($U);
   $seed = str_pad('', SEED_LENGTH, 'x');
-  $plain = "$seed${U['login']}!${U['karma']}!${U['penize']}!${U['jidlo']}!${U['skore']}!$perkyStr";
+  $plain = "$seed${U['login']}!${U['karma']}!${U['penize']}!${U['jidlo']}!${U['skore']}!${U['cheater']}!$perkyStr";
   while (strlen($plain) % 3 != 0) { // pad to base64 block
    $plain .= ' ';
   }
@@ -112,6 +112,7 @@ function decodeToken($token)
   $U['penize'] = array_shift($token_list);
   $U['jidlo'] = array_shift($token_list);
   $U['skore'] = array_shift($token_list);
+  $U['cheater'] = array_shift($token_list);
   $p = StrToPerky(array_shift($token_list));
   $U['perky'] = expandPerks($p);
   

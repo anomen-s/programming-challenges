@@ -50,9 +50,12 @@ foreach($U['perky'] as $perk) {
 //}
 
 imagestring($certimg, 5, 250, 10, "${U['login']}", $red_color);
-imagestring($certimg, 5, 600, 10, "Z${aa}tky: ${U['penize']}   |   Karma: ${U['karma']}   |    J${ii}dlo: ${U['jidlo']}", $text_color);
+imagestring($certimg, 5, 550, 10, "Z${aa}tky: ${U['penize']}   |   Karma: ${U['karma']}   |    J${ii}dlo: ${U['jidlo']}", $text_color);
 imagestring($certimg, 5, 50, 10, "Sk${oo}re ${U['skore']}", $text_color);
+if (!empty($U['cheater'])) {
+    imagestring($certimg, 5, 900, 740, "Ch ${U['cheater']}", $text_color);
+}
 
-imagejpeg($certimg, NULL, 96);
+imagejpeg($certimg, NULL, 90);
 //imagepng($certimg);
 imagedestroy($certimg);
