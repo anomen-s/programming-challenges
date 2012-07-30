@@ -3,6 +3,12 @@ header('Content-type: image/jpeg');
 
 require_once('toolbox.php');
 
+if (HAVE_DEBUG) {
+    header("Cache-Control: no-cache, must-revalidate");
+    header("Expires: Fri, 01 Jan 2010 05:00:00 GMT");
+    header("Pragma: no-cache");
+}
+
 if (empty($_SERVER["QUERY_STRING"])) {
  header('X-Error: no token');
  readfile('img/no.png');
