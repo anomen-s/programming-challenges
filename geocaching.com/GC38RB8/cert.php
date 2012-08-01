@@ -28,7 +28,7 @@ $text_color = imagecolorallocate($certimg, 0x00, 0x7f, 0x00);
 $ii = chr(0xED);
 $aa = chr(0xE1);
 $oo = chr(0xF3);
-
+$pperku = count($U['perky']);
 imagefill($certimg, 0, 0, $bg);
 
  $bg_img = imagecreatefrompng("img/cert_bg.png");
@@ -61,6 +61,11 @@ imagestring($certimg, 5, 50, 10, "Sk${oo}re ${U['skore']}", $text_color);
 if (!empty($U['cheater'])) {
     imagestring($certimg, 5, 900, 740, "Ch ${U['cheater']}", $text_color);
 }
+if (!empty($U['perky'])) {
+    imagestring($certimg, 5, 650, 440, "Nalezeno ${pperku} ze 16 perku", $text_color);
+}
+
+
 
 imagejpeg($certimg, NULL, 90);
 //imagepng($certimg);

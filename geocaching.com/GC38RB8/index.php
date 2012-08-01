@@ -39,7 +39,7 @@ $valid = true;
 <div id="input_div">
 
 <div id="form_login">
-<label for="login" title="Login na geocaching.com:">Jméno</label><br />
+<label for="login" title="Login na geocaching.com:">Jméno   (jde zadat max 2 formuláře/den)</label><br />
 <input type="text" name="login" id="login" value="<?php echo $U['login_safe']; ?>" />
 </div>
 
@@ -62,13 +62,14 @@ $valid = true;
 </div>
 
 <div id="form_klice">
-<label for="klice">Nalezené klíče, micro, perky i předměty oddělené čárkou (na pořadí klíčů a micro záleží!):</label>
+<label for="klice">Nalezené klíče, micro, perky i předměty oddělené čárkou (na&nbsp;pořadí klíčů a micro záleží!):</label>
 <br />
 <textarea cols="30" rows=8" name="klice" id="klice"><?php echo $U['klice_safe'];  ?></textarea>
 </div>
 
 <div>
-<input type="submit" name="form_submit" id="form_submit" />
+<input type="submit" name="form_submit" id="form_submit" /> 
+<label for="submit"> Po zobrazení skóre zkopírujte, prosím, link do vašeho logu na GC.com, Děkuji JeDie.</label>
 </div>
 
 </div>
