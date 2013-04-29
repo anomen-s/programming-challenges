@@ -28,6 +28,9 @@ $text_color = imagecolorallocate($certimg, 0x00, 0x7f, 0x00);
 $ii = chr(0xED);
 $aa = chr(0xE1);
 $oo = chr(0xF3);
+$zz = chr(0xBE);
+$ss = chr(0xB9);
+
 $pperku = count($U['perky']);
 imagefill($certimg, 0, 0, $bg);
 
@@ -59,12 +62,17 @@ imagestring($certimg, 5, 250, 10, "${U['login']}", $red_color);
 imagestring($certimg, 5, 550, 10, "Z${aa}tky: ${U['penize']}   |   Karma: ${U['karma']}   |    J${ii}dlo: ${U['jidlo']}", $text_color);
 imagestring($certimg, 5, 50, 10, "Sk${oo}re ${U['skore']}", $text_color);
 if (!empty($U['cheater'])) {
-    imagestring($certimg, 5, 900, 740, "Ch ${U['cheater']}", $text_color);
+    imagestring($certimg, 5, 900, 740, "C ${U['cheater']}", $text_color);
 }
 if (!empty($U['perky'])) {
-    imagestring($certimg, 5, 650, 440, "Nalezeno ${pperku} ze 16 perku", $text_color);
+    imagestring($certimg, 5, 350, 400, "Z${ii}skano ${pperku} z 20 mo${zz}ných ocenìn${ii}/perkù", $text_color);
 }
+imagestring($certimg, 5, 350, 445, "Ocenìn${ii} nemusí být jen kladná a poctivì nelze získat v${ss}echny...", $text_color);
+imagestring($certimg, 5, 350, 460, "Nìkteré perky jsou záporné a nez${ii}skáte za nì extra body", $text_color);
 
+imagestring($certimg, 5, 350, 490, "Link na tento certifikát, prosím, pøilo${zz}te ke svému logu na GC.com", $text_color);
+imagestring($certimg, 5, 410, 510, "Max score = cca 22000 pro záporáky, hodní získají o trochu ménì.", $text_color);
+imagestring($certimg, 5, 595, 550, "It's a harsh world...", $red_color);
 
 
 imagejpeg($certimg, NULL, 90);
