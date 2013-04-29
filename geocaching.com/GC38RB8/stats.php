@@ -106,6 +106,51 @@ function dbstats_update(&$U, $cert, $invalid)
     
 }
 
+function dbstats_read($limit = 15)
+{
+    if (HAVE_MYSQL) {
+	$sql = "SELECT *, (LENGTH(perky) - LENGTH(REPLACE(perky, ' ', '')) + 1) AS perky_pocet FROM fallout_stats ";
+	$sql .= " WHERE (invalid = '') OR (invalid IS NULL) ";
+	$sql .= " ORDER BY skore DESC";
+	$sql .= " LIMIT $limit";
+
+        $result = mysql_query($sql)
+	    or die("Unable to execute update: ". mysql_error());
+
+	$r = array();
+	while ($row = mysql_fetch_assoc($result)) {
+	    $r[] = $row;
+	}
+        return $r;
+    }
+    else {
+	return array();
+    }
+    
+}
+
+function dbstats_avg($limit = 15)
+{
+    if (HAVE_MYSQL) {
+	$sql = "SELECT AVG(perky_pocet) AS pp, AVG(penize) AS p, AVG(jidlo) AS j, AVG(karma) AS k, AVG(skore) AS s FROM (";
+
+	$sql .= " SELECT *, (LENGTH(perky) - LENGTH(REPLACE(perky, ' ', '')) + 1) AS perky_pocet FROM fallout_stats ";
+	$sql .= " WHERE (invalid = '') OR (invalid IS NULL) ";
+	$sql .= " ORDER BY skore DESC";
+	$sql .= " LIMIT $limit";
+	$sql .= ") AS topskore";
+
+        $result = mysql_query($sql)
+	    or die("Unable to execute update: ". mysql_error());
+
+	return mysql_fetch_assoc($result);
+    }
+    else {
+	return array();
+    }
+    
+}
+
 function sql_log($sql)
 {
  $SQL_FILE= TMPDIR . "/sql.txt";
