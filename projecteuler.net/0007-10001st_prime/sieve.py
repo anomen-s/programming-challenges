@@ -7,7 +7,7 @@
 import math;
 
 TOP=10001
-TOP=20001
+#TOP=20001
 
 #tip
 RANGE=300000

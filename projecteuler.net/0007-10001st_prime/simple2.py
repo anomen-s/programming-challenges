@@ -24,15 +24,28 @@ def isPrime(n):
     
   return True;
 
-#print 2
 
-idx = 3
-cnt = 1
+
+#print 2
+#print 3
+
+idx = 6
+cnt = 2
+
 while cnt < TOP:
 
-  if isPrime(idx):
+  if isPrime(idx-1):
     cnt = cnt + 1
+#    print (idx-1)
+  if isPrime(idx+1):
+    cnt = cnt + 1
+#    print (idx+1)
   
-  idx = idx + 1
+  idx = idx + 6
 
-print (idx-1)
+
+if (cnt == TOP):
+  print  'result', (idx+1-6)
+else:
+  print 'result', (idx-1-6)
+
