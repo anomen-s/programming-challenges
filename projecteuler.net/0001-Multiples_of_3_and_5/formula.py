@@ -4,21 +4,17 @@
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
 TOP = 1000
-#TOP = 10000000
 
-S = 0
-i = 0
-
-while i < TOP:
-    if (i % 5) != 0:
-       S = S + i;
-    i = i + 3
+T=TOP-1
+def sum(N):
+ return N * (N+1) / 2
 
 
-i = 0
-while i < TOP:
-    S = S + i
-    i = i + 5
+s3 = 3 * sum(T/3)
+s5 =  5 * sum(T/5)
+s15 = 15 * sum(T/15)
 
 
-print S
+print s3, s5, s15
+print s3 + s5 - s15
+
