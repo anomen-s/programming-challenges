@@ -27,13 +27,13 @@ raw_data('7316717653133062491922511967442657474235534919493496983520312774506326
 
 input_data(Digits) :-
     raw_data(Raw),
-    atom_codes(Raw, Chars),
-    subtract(Chars, Digits, 48).
+    atom_chars(Raw, Chars), % split into single digits
+    a2n(Chars, Digits).
 
-subtract([],[],_).
-subtract([C0|C],[R1|R],Diff) :-
-    R1 is C0 - Diff,
-    subtract(C, R, Diff).
+a2n([],[]).
+a2n([C0|C],[R0|R]) :-
+    atom_number(C0, R0), % convert single digit string to int
+    a2n(C, R).
     
 
 calculate([C0|Chars], SeqLength, Max) :-
