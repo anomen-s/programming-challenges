@@ -3,6 +3,5 @@ various programing challenges
 
 https://projecteuler.net
 
-
-Lists:
+##Lists
 http://codecondo.com/coding-challenges/
