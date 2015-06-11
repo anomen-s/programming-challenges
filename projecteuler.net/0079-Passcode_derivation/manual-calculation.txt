@@ -1,0 +1,31 @@
+Relations:
+==========
+build a list of relations, and eliminate them from table.
+
+row# -> col#
+
+res: 73162890  (unused: 4)
+
+ 0  1  2  3  4  5  6  7  8  9
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[3, 0, 2, 0, 0, 0, 5, 0, 4, 3]
+[3, 0, 0, 0, 0, 0, 0, 0, 2, 5]
+[1, 4, 1, 0, 0, 0, 4, 0, 4, 2]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[5, 0, 5, 0, 0, 0, 0, 0, 4, 4]
+[4, 5, 4, 2, 0, 0, 5, 0, 2, 4]
+[4, 0, 0, 0, 0, 0, 0, 0, 0, 4]
+[4, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+
+- remove same rows/columns in paralel
+- what if not possible ? add digit both to begining and end?
+
+
+Selection:
+==========
+Select number which is only present in first place.
+remove it.
+
