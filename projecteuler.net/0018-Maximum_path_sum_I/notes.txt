@@ -1,0 +1,22 @@
+could be simplified,
+if data are in 2D table.
+
+for r in rows-1 .. 1:
+  val[r][i] = max(val[r+1][i],  val[r+1][i+1])
+
+print rows[0][0]
+
+-----------
+or in 1D array:
+index of children of previous node is -1 if in tree or -2 if going up level
+
+ width = "width"
+ loop = width
+ while not top:
+    loop--
+    child--
+    if loop == 0:
+       width--
+       loop = width
+       child --
+    [curr].val = [curr].val + [child].val + [child+1].val
