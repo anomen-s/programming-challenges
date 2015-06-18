@@ -7,6 +7,7 @@ q = Queue.PriorityQueue()
 
 q.put((11,'fabc'))
 q.put((1,'abc'))
+q.put((1,'abc2'))
 q.put((31,'gabc'))
 
 while not q.empty():
