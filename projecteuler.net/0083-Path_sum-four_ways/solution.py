@@ -61,7 +61,7 @@ for start in [0]: #xrange(DIM):
   if startNode or not node[iVisit]:
 #   print 'already visited', node
 #  else:
-   print 'Processsing node', node
+#   print 'Processsing node', node
    minN = 2**20
    foundN = False
    # find Visited  neighbors
@@ -97,14 +97,14 @@ for start in [0]: #xrange(DIM):
 #        print 'check neighbour:', nbr
      
         if not nbr[iVisit]:
-          print 'Adding', nbr, 'to', queue.qsize()
+#          print 'Adding', nbr, 'to', queue.qsize()
           queue.put((nbr[iVal]+node[iPath],nbr))
 #     die()
 #    raise Exception('unconnected node')
   startNode=False
 
  print 'result ', start
- printm(M)
+# printm(M)
  cmin = M[DIM-1][DIM-1][iPath]
  print 'cmin', start, '=', cmin
  MIN = min(MIN,cmin)
