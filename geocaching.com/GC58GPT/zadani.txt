@@ -1,0 +1,17 @@
+Fakta: v přístavu vedle sebe stojí pět lodí různých národností (řecká, španělská, anglická, francouzská a brazilská), s různě barevnými komíny (černý, bílý, zelený, modrý, červený), cíli (Marseille, Manila, Hamburk, Port Saidu, Janov), náklady (káva, kakao, obilí, rýže, čaj) časy odjezdů (5, 6, 7, 8, 9).
+
+ Řecká vyplouvá v 6 a veze kávu.
+ Anglická vyplouvá v 9.
+ Prostřední má černý komín.
+ Francouzská je vlevo od lodi vezoucí kávu a má modrý komín.
+ Hned vpravo od lodi vezoucí kakao je loď, která jede do Marseille.
+ Brazilská loď má namířeno do Manily.
+ Vedle lodi vezoucí rýži je loď se zeleným komínem.
+ Loď do Janova vyplouvá v 5.
+ Španělská vyráží v 7 a je napravo lodi jedoucí do Marseile.
+ Do Hamburka jede loď s červeným komínem.
+ Vedle lodi, která vyplouvá v 7, je loď s bílým komínem.
+ Loď kotvící na kraji veze obilí.
+ Loď s černým komínem vyplouvá v osm.
+ Loď vezoucí obilí kotví vedle lodi vezoucí rýži.
+ Do Hamburku vyplouvá loď v šest.

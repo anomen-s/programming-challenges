@@ -1,0 +1,7 @@
+Pravidla KenKenu:
+
+ 1. Tabulka je stejna jako u Sudoku, ma stejny pocet sloupcu a radku. V nasem pripade bude kazde policko tabulky obsaohovat vzdy jednu cislici od 1 do 9.
+ 2. Zadna cislice 1 az 9 se nesmi v jednom radku nebo sloupci opakovat.
+ 3. Cisla a znamenka uvnitr bloku vyznacenych silnou carou na rikaji, jestli uvedene cislo je soucet (vysledek secteni dvou nebo vice cisel), rozdil (o kolik je jedno cislo vetsi nez druhe), nasobek (vysledek soucinu dvou nebo vice cisel) nebo podil (kolikrat je jedno cislo vetsi nez druhe)
+ 4. Pokud je v samostatnem silne vyznacenem policku jenom jedno cislo, zapiseme ho jako konecny vysledek.
+ 
