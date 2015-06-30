@@ -121,24 +121,26 @@ def testNumPermutations(numsIn):
    bufferSize=max(nums)**len(nums)
    result = list(range(bufferSize))
    #testExpressions(nums, result)
-   genPermutations(nums, [], result)
-#   print result
+   for perm in genPermutations(nums, []):
+      testExpressions(perm, result)
+     
    for r in result:
      if r > 0:
        return r - 1
    raise Exception("Buffer full")
 
 # for each number permutation compute all expressions
-def genPermutations(nums, perm, result):
+def genPermutations(nums, perm):
     if (len(nums) > 1):
       for i in range(len(nums)):
         mynums = nums[:]
         perm.append(mynums.pop(i))
-        genPermutations(mynums, perm, result)
+        for n in genPermutations(mynums, perm):
+          yield n
         perm.pop()
     else:
 #      print 'testing', perm
-      testExpressions(perm + nums, result)
+      yield (perm + nums)
         
 
 # try all 4-digit combinations 
@@ -176,7 +178,6 @@ def selectNums(numsIn, selected, result):
 #18 /
 #1897 /\*
 
-#print testExpressions([1,2,3,4])
 RESULT = [0,[]]
 
 selectNums([1,2,3,4,5,6,7,8,9], [], RESULT)
