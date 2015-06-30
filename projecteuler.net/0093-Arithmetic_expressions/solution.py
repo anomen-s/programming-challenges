@@ -29,27 +29,27 @@ def evalB(nums, ops):
     l = evalExpr(nums[0], nums[1], ops[0])
     r = evalExpr(nums[2], nums[3], ops[2])
     if (l == None) or (r == None):
-	return None
+      return None
     return evalExpr(l,r, ops[1])
 
 def evalLL(nums, ops):
     ''' compute ((a*b)*a)*b '''
     l = evalExpr(nums[0], nums[1], ops[0])
     if (l == None):
-	return None
+      return None
     l2 = evalExpr(l, nums[2], ops[1])
     if (l2 == None):
-	return None
+     return None
     return evalExpr(l2, nums[3], ops[2])
 
 def evalLR(nums, ops):
     ''' compute (a*(b*a))*b '''
     l = evalExpr(nums[1], nums[2], ops[1])
     if (l == None):
-	return None
+      return None
     l2 = evalExpr(nums[0], l, ops[0])
     if (l2 == None):
-	return None
+      return None
     return evalExpr(l2, nums[3], ops[2])
 
 def evalRR(nums, ops):
@@ -75,7 +75,7 @@ def evalRL(nums, ops):
 def nextOp(ops, opcount):
   ''' find next combinations of operators'''
   carry = True
-  for i in xrange(len(ops)):
+  for i in range(len(ops)):
     if carry:
        carry = False
        r = ops[i] + 1
@@ -97,7 +97,7 @@ def markResult(result, r):
     
 # check all expressions for given number set (no permutation)
 def testExpressions(nums, result):
-  ops = [0 for i in xrange(len(nums)-1)]
+  ops = [0 for i in range(len(nums)-1)]
   while True:
 #    print 'check', ops, '=', 'x'
     markResult(result, evalB(nums, ops))
@@ -119,7 +119,7 @@ def testExpressions(nums, result):
 def testNumPermutations(numsIn):
    nums = numsIn[:]
    bufferSize=max(nums)**len(nums)
-   result = range(bufferSize)
+   result = list(range(bufferSize))
    #testExpressions(nums, result)
    genPermutations(nums, [], result)
 #   print result
@@ -131,7 +131,7 @@ def testNumPermutations(numsIn):
 # for each number permutation compute all expressions
 def genPermutations(nums, perm, result):
     if (len(nums) > 1):
-      for i in xrange(len(nums)):
+      for i in range(len(nums)):
         mynums = nums[:]
         perm.append(mynums.pop(i))
         genPermutations(mynums, perm, result)
@@ -148,7 +148,7 @@ def selectNums(numsIn, selected, result):
      return
   if len(selected) == 4:
      res = testNumPermutations(selected)
-     print res, selected
+     print (res, selected)
      if res > result[0]:
        result[0] = res
        result[1] = selected[:]
@@ -180,5 +180,5 @@ def selectNums(numsIn, selected, result):
 RESULT = [0,[]]
 
 selectNums([1,2,3,4,5,6,7,8,9], [], RESULT)
-print RESULT
+print (RESULT)
 #print testNumPermutations([1,2,3,4])
