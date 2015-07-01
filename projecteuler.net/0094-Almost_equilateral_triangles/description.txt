@@ -1,0 +1,38 @@
+It is easily proved that no equilateral triangle exists with integral length sides and integral area.
+However, the almost equilateral triangle 5-5-6 has an area of 12 square units.
+
+We shall define an almost equilateral triangle to be a triangle for which two sides are equal
+and the third differs by no more than one unit.
+
+Find the sum of the perimeters of all almost equilateral triangles with integral side lengths
+and area and whose perimeters do not exceed one billion (1,000,000,000).
+
+
+
+
+Heron formula
+ s = (a + b + c) / 2
+ area = sqrt(s * (s-a) * (s-b) * (s-c))
+ 
+ 
+AETp
+ a, a, a+1
+ s = (3 * a + 1) / 2
+ area = sqrt(s * (s-a) * (s-a) * (s-a-1)) 
+
+ area = sqrt ((3 * a + 1)  * (a + 1)**2 * (a - 1)  / 16)
+
+AETn
+ a, a, a-1
+ s = (3 * a - 1) / 2
+ area = sqrt( (3 * a - 1) * (a-1)**2 * (a+1) / 16) 
+
+
+-------------------------
+
+valid:
+n*n*(n+1)  < (n+1)*(n+1)*n
+n  < (n+1)
+
+so
+AETn(n) < AETp(n) < AETn(n+1) < AETp(n+1)
