@@ -1,0 +1,1 @@
+14134 -- didn't include triangles with on border, eg: (0,0)(25,50)(27,49)
