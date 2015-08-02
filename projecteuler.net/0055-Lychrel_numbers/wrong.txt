@@ -1,0 +1,1 @@
+246 --  not counted palindromes numbers
