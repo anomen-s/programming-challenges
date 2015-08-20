@@ -1,6 +1,8 @@
 
-for A in "`ls -d 0*\ *`"
+ls -d 0*\ * | while read F
 do
- NA=`echo "$A" | tr ' ' '_'`
- mv -v "$A" "$NA"
+ echo $F
+ NA=`echo "$F" | tr ' ' '_'`
+ mv -v "$F" "$NA"
 done
+
