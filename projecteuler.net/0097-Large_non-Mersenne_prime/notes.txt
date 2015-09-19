@@ -1,0 +1,26 @@
+
+28433 * 2**7830457 + 1
+
+Find the last ten digits of this prime number.
+
+last 10 digits
+-> mod (10**10)
+
+
+ending m digits of the positive powers of two repeat in cycles; 
+specifically, cycles of length 4·5**(m-1), starting at 2**m. 
+
+Powers of two that differ in their exponents by 4·5**(m-1) have the same ending m digits.
+
+
+
+2**10 ~~ 2**(10 + 4*5**(10-1))
+
+cycle = 4*5**(10-1) 
+
+
+
+p2 = 2**(7830457 + 10 - (10 + cycle)) % (10**10)
+
+
+res = (28433*p2+1) % (10**10)
