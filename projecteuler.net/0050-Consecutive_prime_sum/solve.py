@@ -12,12 +12,10 @@
 #Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
 import math
-from bitarray import bitarray
 
 
 def sieve(RANGE):
-    primes = bitarray(RANGE)
-    primes.setall(True)
+    primes = [True for x in range(RANGE)]
     primes[0] = False
     primes[1] = False
     # find primes
