@@ -1,8 +1,11 @@
 #!/usr/bin/python
 
-#The prime factors of 13195 are 5, 7, 13 and 29.
+#The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right, and remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work from right to left: 3797, 379, 37, and 3.
 
-#What is the largest prime factor of the number 600851475143 ?
+#Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
+
+#NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+
 
 import gmpy2
 import math
@@ -11,17 +14,27 @@ from bitarray import bitarray
 #tip
 RANGE=10**6 #00000
 
-primes = bitarray(RANGE)
-primes.setall(True)
-primes[0] = False
-primes[1] = False
 
-def sieve(primes, p):
-  global RANGE
-  i = p + p
-  while i < RANGE:
-    primes[i] = False
-    i = i + p
+#def sieve(primes, p, RANGE):
+#  i = p + p
+#  while i < RANGE:
+#    primes[i] = False
+#    i = i + p
+
+def sieve(RANGE):
+    primes = bitarray(RANGE)
+    primes.setall(True)
+    primes[0] = False
+    primes[1] = False
+    # find primes
+    for p in xrange(2, len(primes)/2+1):
+      if primes[p]:
+        i = p + p
+        while i < RANGE:
+          primes[i] = False
+          i = i + p
+    return primes
+    
 
 def checkIsPrimeG(p):
   return gmpy2.is_prime(p)
@@ -51,12 +64,15 @@ def checkTruncPrime(n):
   return True
   
 
-# find primes
-for index in xrange(2, len(primes)/2+1):
-  if primes[index]:
-    sieve(primes, index)
-    
+primes = sieve(RANGE)
 print 'Sieve completed'
+
+# find primes
+#for index in xrange(2, len(primes)/2+1):
+#  if primes[index]:
+#    sieve(primes, index)
+#    
+#print 'Sieve completed'
 
 #print primes
 
