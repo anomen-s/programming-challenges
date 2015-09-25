@@ -6,7 +6,7 @@
 
 import math;
 
-TOP=20
+TOP=20 + 1
 
 def factors(N):
   f = [0 for i in range(TOP)]
