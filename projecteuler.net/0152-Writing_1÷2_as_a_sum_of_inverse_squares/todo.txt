@@ -1,0 +1,6 @@
+
+Implementation
+
+- multiply both sides by lowest common multiple
+-> Knapsack problem
+- brute force search is too slow (n=35 max)
