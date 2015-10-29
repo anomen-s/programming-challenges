@@ -4,7 +4,7 @@
 import math
 
 DEBUG = False
-N=1000**1
+N=1000**2
 
 
 def d(args):
