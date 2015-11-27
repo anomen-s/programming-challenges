@@ -12,17 +12,11 @@ import base64
 import itertools
 import sys
 
+sys.path.append("../toolbox")
+import tools
+import xorcrypto
 
-def xorBytes(s1, val):
-    '''
-      XOR bytes sequence with password
-    '''
-    nums = [(c1 ^ c2) for (c1, c2) in zip(s1, itertools.cycle(val))]
-    asBytes = bytes(nums)
-    return asBytes
 
-    
-    
 def main():
     if len(sys.argv) != 3:
       print("Usage: %s [key] [inputtext]" % sys.argv[0])
@@ -32,10 +26,10 @@ def main():
     rawInput = bytes(data, 'utf-8')
     rawKey = bytes(key, 'utf-8')
     
-    xorEnc = xorBytes(rawInput, rawKey)
-    print("In:  " + str(base64.b16encode(rawInput),'utf-8'))
-    print("Key: " + str(base64.b16encode(rawKey)*((len(data)+len(key)-1)//len(key)),'utf-8'))
-    print("Out: " + str(base64.b16encode(xorEnc),'utf-8').lower())
+    xorEnc = xorcrypto.xor(rawInput, rawKey)
+    print("In:  " + tools.toHex(rawInput))
+    print("Key: " + tools.toHex(rawKey*((len(data)+len(key)-1)//len(key))))
+    print("Out: " + tools.toHex(xorEnc,0,False))
     
 if  __name__ =='__main__':
   main()

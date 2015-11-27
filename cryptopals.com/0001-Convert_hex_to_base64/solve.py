@@ -17,13 +17,13 @@ DEBUG = True
 STR = '49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d'
 
 def hex2b64(s):
-   '''
+    '''
      Convert hex string to string
-   '''
-#    asBytes = bytes.fromhex(s)
+    '''
+    #asBytes = bytes.fromhex(s)
     asBytes = base64.b16decode(STR.upper())
     asB64 = base64.b64encode(asBytes)
-    return asB64.decode('utf-8')
+    return str(asB64, 'utf-8')
 
 def main():
     print(hex2b64(STR))

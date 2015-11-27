@@ -10,49 +10,30 @@ Find it.
 
 import time
 import base64
+import sys
+
+sys.path.append("../toolbox")
+import tools
+import xorcrypto
+import scoring
 
 DEBUG = True
 
 
-def decodeHex(s):
-    '''
-      Convert hex string to bytes
-    '''
-    return bytes.fromhex(s)
-    
 
-def xorBytes(s1, val):
-    '''
-      XOR bytes sequence with constant value val
-    '''
-    nums = [(c ^ val) for c in s1]
-    asBytes = bytes(nums)
-    return asBytes
+T = scoring.initSingleCharTab()
 
-
-def initScoreTab():
-   T = [0 for x in range(256)]
-   for (p,c) in enumerate('ETAOIN SHRDLU CMFYWGPBVKXQJZ'[::-1]):
-     T[ord(c)] = p
-     T[ord(c.lower())] = p
-   return T
-  
-
-T = initScoreTab()
-
-def score(s):
-    return sum([T[c] for c in s])
     
     
 def main():
     res = []
     with open('4.txt','r') as f:
       for line in f.readlines():
-        enc = decodeHex(line.strip())
-        dec = [[score(xorBytes(enc, i)),i,xorBytes(enc, i)] for i in range(256)]
+        enc = tools.fromHex(line.strip())
+        dec = [[scoring.compute(xorcrypto.xor(enc, i)),i,xorcrypto.xor(enc, i)] for i in range(256)]
         res.extend(dec)
     res = sorted(res)
-    for x in res: print(x)
+    for x in res[-20:]: print(x)
 
 
 def d(args):

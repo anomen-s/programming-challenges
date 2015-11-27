@@ -45,8 +45,7 @@ def main():
     h2 = decodeHex(STR2)
     asBytes = xorBytes(h1, h2)
     asHex = base64.b16encode(asBytes)
-    print(asHex.decode('utf-8').lower())
-    
+    print(str(asHex,'utf-8').lower())
 
 
 def d(args):

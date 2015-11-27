@@ -23,6 +23,11 @@ I promise, we aren't wasting your time with this.
 import time
 import base64
 import itertools
+import sys
+
+sys.path.append("../toolbox")
+import tools
+import xorcrypto
 
 DEBUG = True
 
@@ -30,30 +35,19 @@ STR = ["Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cym
 
 KEY = "ICE"
 
-
-def xorBytes(s1, val):
-    '''
-      XOR bytes sequence with password
-    '''
-    nums = [(c1 ^ c2) for (c1, c2) in zip(s1, itertools.cycle(val))]
-    asBytes = bytes(nums)
-    return asBytes
-
-    
     
 def main():
     for S in STR:
      rawInput = bytes(S, 'utf-8')
      rawKey = bytes(KEY, 'utf-8')
     
-     xorEnc = xorBytes(rawInput, rawKey)
-     print("In:  " + str(base64.b16encode(rawInput),'utf-8'))
-     print("Out: " + str(base64.b16encode(xorEnc),'utf-8').lower())
+     xorEnc = xorcrypto.xor(rawInput, rawKey)
+     print("In:  " + tools.toHex(rawInput))
+     print("Out: " + tools.toHex(xorEnc,0,False))
      
      print("Exp: " + "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f")
-     print("Key: " + str(base64.b16encode(rawKey)*25,'utf-8'))
-#    print (str(xorEnc, 'utf-8'))
-    
+     print("Key: " + tools.toHex(rawKey*25))
+
 
 def d(args):
     global DEBUG
