@@ -6,9 +6,15 @@ __all__ = [ "compute", "initSingleCharTab" ]
 
 def initSingleCharTab():
    T = [0] * 256
+   for i in range(128,256):
+     T[i] = -20
+   for i in range(0x0E,0x20):
+     T[i] = -20
+   for i in range(0x20,0x30):
+     T[i] = 2
    for (p,c) in enumerate('ETAOIN SHRDLU CMFYWGPBVKXQJZ'[::-1]):
-     T[ord(c)] = p
-     T[ord(c.lower())] = p
+     T[ord(c)] = 30+4*p
+     T[ord(c.lower())] = 40+4*p
    return T
   
 

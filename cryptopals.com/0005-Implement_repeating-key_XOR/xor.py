@@ -30,6 +30,7 @@ def main():
     print("In:  " + tools.toHex(rawInput))
     print("Key: " + tools.toHex(rawKey*((len(data)+len(key)-1)//len(key))))
     print("Out: " + tools.toHex(xorEnc,0,False))
+    print("B64: " + tools.toB64(xorEnc))
     
 if  __name__ =='__main__':
   main()

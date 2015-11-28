@@ -11,50 +11,24 @@ The hex encoded string:
  How? Devise some method for "scoring" a piece of English plaintext. Character frequency is a good metric. Evaluate each output and choose the one with the best score.
 '''
 
-import time
-import base64
+import sys
 
-DEBUG = True
+sys.path.append("../toolbox")
+import tools
+import xorcrypto
+import scoring
 
 
 STR = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 
-def decodeHex(s):
-    '''
-      Convert hex string to bytes
-    '''
-    return bytes.fromhex(s)
-    
-
-def xorBytes(s1, val):
-    '''
-      XOR bytes sequence with constant value val
-    '''
-    nums = [(c ^ val) for c in s1]
-    asBytes = bytes(nums)
-    return asBytes
-
-
-def initScoreTab():
-   T = [0 for x in range(256)]
-   for (p,c) in enumerate('ETAOIN SHRDLU CMFYWGPBVKXQJZ'[::-1]):
-     T[ord(c)] = p
-     T[ord(c.lower())] = p
-   return T
-  
-
-T = initScoreTab()
-
-def score(s):
-    return sum([T[c] for c in s])
-    
-    
 def main():
-    enc = decodeHex(STR)
+    enc = tools.fromHex(STR)
     
-    res = [[score(xorBytes(enc, i)),i,xorBytes(enc, i)] for i in range(256)]
+    res = [[scoring.compute(xorcrypto.xor(enc, i)),i,xorcrypto.xor(enc, i)] for i in range(256)]
     res = sorted(res)
-    for x in res: print(x)
+    for x in res[:-1]:
+      if x[0]>0: tools.d(x)
+    print(res[-1])
 #    for i in range(256):
 #      dec = xorBytes(enc, i)
       
@@ -62,13 +36,5 @@ def main():
     
 
 
-def d(args):
-    global DEBUG
-    if DEBUG:
-      print(args)
-
 if  __name__ =='__main__':
-  tStart = time.time()
-  main()
-  print(['time[ms]',int((time.time() - tStart)*1000)])
-
+  tools.run(main)

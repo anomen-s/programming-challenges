@@ -1,7 +1,39 @@
 import base64
+import time
 
-__all__ = [ "toHex", "toB64", "fromB64", "fromHex", "transpose" ]
+__all__ = [ "d", "setDebug", "start", "end", "run",
+            "toHex", "toB64", "fromB64", "fromHex",
+            "transpose" ]
 
+#########################################################################
+###             DEBUGGING                                             ###
+#########################################################################
+
+_DEBUG = False
+
+def setDebug(val=True):
+    global _DEBUG
+    _DEBUG = val
+
+def d(args):
+    if _DEBUG:
+      print(args)
+
+_TSTART = 0
+
+def start():
+  global _TSTART
+  _TSTART = time.time()
+
+def end():
+  print(['time[ms]',int((time.time() - _TSTART)*1000)])
+
+
+def run(main_method, debug=True):
+    setDebug(debug)
+    start()
+    main_method()
+    end()
 #########################################################################
 ###             General conversions                                   ###
 #########################################################################
@@ -52,10 +84,23 @@ def transpose(data, blocklen, skipPartial=True):
 
   if not skipPartial:
     lastBlock = data[cnt*blocklen:]
-    for (val, idx) in zip(lastBlock, range(blocklen)):
+    for (idx, val) in enumerate(lastBlock):
       tbl[idx] += bytes(chr(val),'utf-8')
 
   return tbl
+
+def detranspose(blocks):
+  if len(blocks) == 0:
+     return b'' 
+
+  l = len(blocks)
+  res = bytearray(len(blocks[0])*l)
+  for (idx, bl) in enumerate(blocks):
+    for (iidx, item) in enumerate(bl):
+      res[iidx*l+idx] = item
+#      print(['set',iidx*l+idx,item, res])
+  return res
+
 
 #########################################################################
 ###             Tests                                                 ###
@@ -79,12 +124,24 @@ def _conv_tests():
 def _transpose_tests():
     blcks = transpose(b'0123456', 3, True)
     if (len(blcks) != 3) or (blcks[0] != b'03') or (blcks[2] != b'25'):
-     print('error: ' + str(blcks))
-     exit(1)
+      print('error: ' + str(blcks))
+      exit(1)
+
+    decblck = detranspose(blcks)
+    if (decblck) != b'012345':
+      print('error detranspose: ' + str(decblck))
+      exit(1)
+
     blcks = transpose(b'0123456', 2, False)
     if (len(blcks) != 2) or (blcks[0] != b'0246') or (blcks[1] != b'135'):
-     print('error: ' + str(blcks))
-     exit(1)
+      print('error: ' + str(blcks))
+      exit(1)
+
+    decblck = detranspose(blcks)
+    if (decblck) != b'0123456\000':
+      print('error detranspose: ' + str(decblck))
+      exit(1)
+    
 
 if  __name__ == '__main__':
   _transpose_tests()
