@@ -51,7 +51,7 @@ def decrypt(enc, blocks, hints=[]):
 def main():
     with open(F,'r') as f:
       b64 = f.read()
-      enc = base64.b64decode(b64)
+      enc = tools.fromB64(b64)
 
 #    print(tools.toHex(enc))
     print(['# of bytes >=0x80: ',sum([(x>>7) for x in enc])])

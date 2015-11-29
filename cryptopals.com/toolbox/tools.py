@@ -2,7 +2,7 @@ import base64
 import time
 
 __all__ = [ "d", "setDebug", "start", "end", "run",
-            "toHex", "toB64", "fromB64", "fromHex",
+            "toStr", "toHex", "toB64", "fromB64", "fromHex",
             "transpose", "getDuplicateBlocks", "split", "stripPadding" ]
 
 #########################################################################
@@ -37,6 +37,10 @@ def run(main_method, debug=True):
 #########################################################################
 ###             General conversions                                   ###
 #########################################################################
+
+def toStr(data):
+  data = str(data, 'utf-8')
+  return data
 
 def toHex(data, maxLen=0, upperCase=True, blockSize=0):
   if (type(data) == str):
@@ -83,7 +87,7 @@ def fromHex(s):
 ###             Block operations                                      ###
 #########################################################################
 
-def split(data, blocklen, skipPartial=True):
+def split(data, blocklen, skipPartial=False):
   if (type(data) == str):
     data = bytes(data,'utf-8')
   cnt = len(data) // blocklen
@@ -142,8 +146,19 @@ def detranspose(blocks):
 
 
 #########################################################################
-###               Padding                                             ###
+###       PKCS #7 Padding                                             ###
 #########################################################################
+
+
+def addPadding(data, blockSize=16):
+    l = blockSize - (len(data) % blockSize)
+    padding = bytes(chr(l)*l, 'ascii')
+    
+    if (type(data) == str):
+      data = bytes(data,'utf-8')
+    return data + padding
+
+
 def stripPadding(data):
     paddingLen = data[-1]
     if paddingLen >= len(data):
