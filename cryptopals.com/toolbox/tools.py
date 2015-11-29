@@ -3,7 +3,7 @@ import time
 
 __all__ = [ "d", "setDebug", "start", "end", "run",
             "toHex", "toB64", "fromB64", "fromHex",
-            "transpose" ]
+            "transpose", "getDuplicateBlocks", "split", "stripPadding" ]
 
 #########################################################################
 ###             DEBUGGING                                             ###
@@ -38,15 +38,23 @@ def run(main_method, debug=True):
 ###             General conversions                                   ###
 #########################################################################
 
-def toHex(data, maxLen=0, upperCase=True):
+def toHex(data, maxLen=0, upperCase=True, blockSize=0):
   if (type(data) == str):
     data = bytes(data,'utf-8')
+
   if maxLen:
     data = data[:maxLen]
-  hex=str(base64.b16encode(data),'utf-8')
+
+  if blockSize:
+   dataBlocks = split(data, blockSize, False)
+  else:
+   dataBlocks = [data]
+   
+  hex=' '.join([str(base64.b16encode(b),'utf-8') for b in dataBlocks])
   if not upperCase:
     hex= hex.lower()
   return hex
+
 
 def toB64(data, maxLen=0):
   if (type(data) == str):
@@ -75,6 +83,37 @@ def fromHex(s):
 ###             Block operations                                      ###
 #########################################################################
 
+def split(data, blocklen, skipPartial=True):
+  if (type(data) == str):
+    data = bytes(data,'utf-8')
+  cnt = len(data) // blocklen
+  blocks = [data[blocklen*i:blocklen*(i+1)] for i in range(cnt)]
+  
+  remaining = len(data) - (cnt*blocklen)
+  if (not skipPartial) and (remaining > 0):
+    blocks.append(data[cnt*blocklen:])
+  
+  return blocks
+
+
+def getDuplicateBlocks(data, blockSize):
+      blocks=split(data, blockSize)
+      
+      dupes = set()
+      blset = set()
+      cnt = 0
+      for bl in blocks:
+        if bl in blset:
+          cnt += 1
+          dupes.add(bl)
+        blset.add(bl)
+
+      if cnt:
+        return (cnt, dupes)
+      else:
+        return None
+
+
 def transpose(data, blocklen, skipPartial=True):
   if (type(data) == str):
     data = bytes(data,'utf-8')
@@ -101,6 +140,18 @@ def detranspose(blocks):
 #      print(['set',iidx*l+idx,item, res])
   return res
 
+
+#########################################################################
+###               Padding                                             ###
+#########################################################################
+def stripPadding(data):
+    paddingLen = data[-1]
+    if paddingLen >= len(data):
+      raise Exception("Invalid padding")
+    for i in range(paddingLen):
+      if data[-1-i] != paddingLen:
+        raise Exception("Invalid padding")
+    return data[:-paddingLen]
 
 #########################################################################
 ###             Tests                                                 ###

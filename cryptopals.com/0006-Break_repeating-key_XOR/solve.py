@@ -24,9 +24,6 @@ wokka wokka!!!
 '''
 
 import sys
-import base64
-import itertools
-import sys
 
 sys.path.append("../toolbox")
 import hamming

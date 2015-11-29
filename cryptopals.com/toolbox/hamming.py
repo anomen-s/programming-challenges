@@ -18,6 +18,9 @@ def compute(str1,str2):
     return sum([_BDT[v1 ^ v2] for (v1, v2) in zip(str1, str2)])
 
 
+def computeRange(data, lengths):
+   print("IMPLEMENT")
+
 #########################################################################
 ###             Tests                                                 ###
 #########################################################################

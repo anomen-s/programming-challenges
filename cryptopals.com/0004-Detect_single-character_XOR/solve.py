@@ -17,14 +17,7 @@ import tools
 import xorcrypto
 import scoring
 
-DEBUG = True
 
-
-
-T = scoring.initSingleCharTab()
-
-    
-    
 def main():
     res = []
     with open('4.txt','r') as f:
@@ -36,13 +29,6 @@ def main():
     for x in res[-20:]: print(x)
 
 
-def d(args):
-    global DEBUG
-    if DEBUG:
-      print(args)
-
 if  __name__ =='__main__':
-  tStart = time.time()
-  main()
-  print(['time[ms]',int((time.time() - tStart)*1000)])
+  tools.run(main)
 

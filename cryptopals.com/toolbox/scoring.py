@@ -6,6 +6,7 @@ __all__ = [ "compute", "initSingleCharTab" ]
 
 def initSingleCharTab():
    T = [0] * 256
+   T[0] = -100
    for i in range(128,256):
      T[i] = -20
    for i in range(0x0E,0x20):
