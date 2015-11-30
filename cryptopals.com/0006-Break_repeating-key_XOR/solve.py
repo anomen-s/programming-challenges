@@ -28,7 +28,7 @@ import sys
 sys.path.append("../toolbox")
 import hamming
 import tools
-import xorcrypto
+import crypto
 import scoring
 
 F='6.txt'
@@ -38,13 +38,13 @@ F='6.txt'
 def decrypt(enc, blocks, hints=[]):
     key = []
     for (idx,block) in enumerate(blocks):
-      res = [[scoring.compute(xorcrypto.xor(block, i)),i,xorcrypto.xor(block, i)] for i in range(256)]
+      res = [[scoring.compute(crypto.xor(block, i)),i,crypto.xor(block, i)] for i in range(256)]
       res = sorted(res)
 #      for x in res[:-1]: tools.d(x)
       print(res[-5:])
       key.append(res[-1][1])
     print(['key',key])
-    dec=xorcrypto.xor(enc, key)#[:80]
+    dec=crypto.xor(enc, key)#[:80]
     print(dec)
     return (scoring.compute(dec),dec, key)
 

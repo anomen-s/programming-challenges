@@ -15,7 +15,7 @@ import sys
 
 sys.path.append("../toolbox")
 import tools
-import xorcrypto
+import crypto
 import scoring
 
 
@@ -24,7 +24,7 @@ STR = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 def main():
     enc = tools.fromHex(STR)
     
-    res = [[scoring.compute(xorcrypto.xor(enc, i)),i,xorcrypto.xor(enc, i)] for i in range(256)]
+    res = [[scoring.compute(crypto.xor(enc, i)),i,crypto.xor(enc, i)] for i in range(256)]
     res = sorted(res)
     for x in res[:-1]:
       if x[0]>0: tools.d(x)

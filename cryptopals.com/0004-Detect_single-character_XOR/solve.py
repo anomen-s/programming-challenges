@@ -14,7 +14,7 @@ import sys
 
 sys.path.append("../toolbox")
 import tools
-import xorcrypto
+import crypto
 import scoring
 
 
@@ -23,7 +23,7 @@ def main():
     with open('4.txt','r') as f:
       for line in f.readlines():
         enc = tools.fromHex(line.strip())
-        dec = [[scoring.compute(xorcrypto.xor(enc, i)),i,xorcrypto.xor(enc, i)] for i in range(256)]
+        dec = [[scoring.compute(crypto.xor(enc, i)),i,crypto.xor(enc, i)] for i in range(256)]
         res.extend(dec)
     res = sorted(res)
     for x in res[-20:]: print(x)

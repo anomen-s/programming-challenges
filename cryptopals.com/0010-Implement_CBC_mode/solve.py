@@ -17,7 +17,7 @@ import sys
 
 sys.path.append("../toolbox")
 import tools
-import xorcrypto
+import crypto
 
 from Crypto.Cipher import AES
 
@@ -40,7 +40,7 @@ def main():
     
     for block in encBlocks:
       decBlock = cipher.decrypt(block)
-      dec = xorcrypto.xor(decBlock, iv)
+      dec = crypto.xor(decBlock, iv)
       iv = block
       result += dec
     

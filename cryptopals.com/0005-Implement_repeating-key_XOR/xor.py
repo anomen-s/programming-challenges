@@ -14,7 +14,7 @@ import sys
 
 sys.path.append("../toolbox")
 import tools
-import xorcrypto
+import crypto
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
     rawInput = bytes(data, 'utf-8')
     rawKey = bytes(key, 'utf-8')
     
-    xorEnc = xorcrypto.xor(rawInput, rawKey)
+    xorEnc = crypto.xor(rawInput, rawKey)
     print("In:  " + tools.toHex(rawInput))
     print("Key: " + tools.toHex(rawKey*((len(data)+len(key)-1)//len(key))))
     print("Out: " + tools.toHex(xorEnc,0,False))
