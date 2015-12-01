@@ -73,7 +73,7 @@ def envelope(data):
     
     return data
 
-def attack(data):
+def attackHeader(data):
 
     expectedText = HEADER[16:32]
     injected = b';admin=true;dat='
@@ -85,17 +85,29 @@ def attack(data):
     
     return newB1 + data[16:]
 
+def attackTail(data):
+
+    print(data)
+    expectedText = tools.addPadding(b'0of%20bacon')
+    injected = tools.addPadding(b';admin=true;')
+    b1 = data[64:80]
+    
+    newB1 = crypto.xor(expectedText, injected)
+    newB1 = crypto.xor(newB1, b1)
+    
+    return data[:64] + newB1 + data[80:]
+
 def adminCheck(data):
     adminStr = b";admin=true;"
     
     return (data.find(adminStr) >= 0)
 
     
-def main():
+def main(a=1):
     print("*** Alice")
     key = genKey()
     #print(key)
-    message = envelope(b"this is normal message")
+    message = envelope(b"this is a message")
     print(message)
     cipherMsg = crypto.encryptCBC(key, message)
     #print(cipherMsg)
@@ -104,7 +116,13 @@ def main():
     #print(decMsg)
 
     print("*** Mitm")
-    receivedMsg = attack(cipherMsg)
+    if a==1:
+      print('attack header')
+      receivedMsg = attackHeader(cipherMsg)
+    else:
+      print('attack tail')
+      receivedMsg = attackTail(cipherMsg)
+      
     #print(receivedMsg)
 
     print("*** Bob")
@@ -116,6 +134,10 @@ def main():
     print(decMsg)
 
 
-if __name__ =='__main__':
-  tools.run(main)
+def bothAttacks():
+   main(1)
+   print('*' * 72)
+   main(2)
 
+if __name__ =='__main__':
+  tools.run(bothAttacks)
