@@ -3,7 +3,8 @@ import tools
 from Crypto.Cipher import AES
 
 __all__ = [ "xorBytes",
-            "encyptCBC", "decyptCBC" ]
+            "encryptCBC", "decryptCBC",
+            "encryptCTR" ]
 
 
 #########################################################################
@@ -12,7 +13,7 @@ __all__ = [ "xorBytes",
 
 def xor(s1, key):
     '''
-      XOR bytes sequence with password.
+      XOR bytes sequence "s1" with password "key" (repeated if necessary).
     '''
     if (type(key) == int):
       key = [key]
@@ -57,6 +58,45 @@ def decryptCBC(key, data):
     return tools.stripPadding(result)
 
 
+def encryptCTR(key, nonce, data, littleEndian=False):
+    '''
+       Perform CTR encrpytion
+       Cipher input is 128bit key, 64bit nonce.
+       Counter is generated big endian (usual) or little endian.
+    '''
+    inBlocks = tools.split(data, 16)
+
+    iv = bytearray(nonce + (b'\000' * 8))
+    result = b''
+    
+    cipher=AES.new(key, AES.MODE_ECB)
+    
+    for inBlock in inBlocks:
+      encBlock = cipher.encrypt(bytes(iv))
+      enc = xor(inBlock, encBlock)
+      _nextBlock(iv, littleEndian)
+      result += enc
+    return result
+
+
+def _nextBlock(iv, littleEndian):
+    if littleEndian:
+      start = 8
+      d = 1
+      end = 16
+    else:
+      start = 15
+      d = -1
+      end = 7
+    carry = 1
+    for idx in range(start,end,d):
+      n = iv[idx] + carry
+      iv[idx] = n & 0xFF
+      carry = n>>8
+      if not carry:
+        break
+
+    return iv
 #########################################################################
 ###               Tests                                               ###
 #########################################################################
