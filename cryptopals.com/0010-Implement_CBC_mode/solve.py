@@ -22,7 +22,7 @@ import crypto
 from Crypto.Cipher import AES
 
 KEY=b"YELLOW SUBMARINE"
-IV=b'\000' * 8
+IV=b'\000' * 16
 
 F='10.txt'
 

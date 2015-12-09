@@ -1,11 +1,20 @@
 import itertools
 import tools
 from Crypto.Cipher import AES
+from Crypto import Random
 
-__all__ = [ "xorBytes",
+__all__ = [ "genKey",
+            "xorBytes",
+            "encryptECB", "decryptECB",
             "encryptCBC", "decryptCBC",
             "encryptCTR" ]
 
+#########################################################################
+###               Key generation                                      ###
+#########################################################################
+
+def genKey(length=16):
+ return Random.new().read(length)
 
 #########################################################################
 ###               XOR encoding                                        ###
@@ -20,6 +29,20 @@ def xor(s1, key):
     nums = [(c1 ^ c2) for (c1, c2) in zip(s1, itertools.cycle(key))]
     asBytes = bytes(nums)
     return asBytes
+
+#########################################################################
+###               AES ECB crypto with PKCS#7 padding                  ###
+#########################################################################
+
+def encryptECB(key, data):
+    inBlock = tools.addPadding(data)
+    cipher = AES.new(key, AES.MODE_ECB)
+    return cipher.encrypt(inBlock)
+
+def decryptECB(key, data):
+    cipher = AES.new(key, AES.MODE_ECB)
+    dec = cipher.decrypt(data)
+    return tools.stripPadding(dec)
 
 #########################################################################
 ###               AES CBC crypto with PKCS#7 padding                  ###
@@ -57,6 +80,9 @@ def decryptCBC(key, data):
       result += dec
     return tools.stripPadding(result)
 
+#########################################################################
+###               AES CTR crypto                                      ###
+#########################################################################
 
 def encryptCTR(key, nonce, data, littleEndian=False):
     '''

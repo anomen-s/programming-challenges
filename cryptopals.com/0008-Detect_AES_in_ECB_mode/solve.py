@@ -17,26 +17,7 @@ import sys
 sys.path.append("../toolbox")
 import tools
 
-from Crypto.Cipher import AES
-
-
 F='8.txt'
-
-def getDuplicateBlocks(data, blockSize):
-      blocks=tools.split(data, blockSize)
-      
-      dupes = set()
-      blset = set()
-      cnt = 0
-      for bl in blocks:
-        if bl in blset:
-          cnt += 1
-        blset.add(bl)
-
-      if cnt:
-        return (cnt, dupes)
-      else:
-        return None
 
 def main():
     with open(F,'r') as f:

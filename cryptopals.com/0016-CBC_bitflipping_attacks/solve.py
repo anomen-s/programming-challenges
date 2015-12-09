@@ -19,47 +19,6 @@ sys.path.append("../toolbox")
 import tools
 import crypto
 
-from Crypto import Random
-from Crypto.Cipher import AES
-
-
-F='10.txt'
-
-def genKey(length=16):
- return Random.new().read(length)
-
-def encryptCBC(key, data):
-    data = tools.addPadding(data)
-    blocks = tools.split(data, 16, False)
-
-    iv = b'\000' * 16
-    result = b''
-    
-    cipher=AES.new(key, AES.MODE_ECB)
-    
-    for block in blocks:
-      inBlock = crypto.xor(block, iv)
-      encBlock = cipher.encrypt(inBlock)
-      iv = encBlock
-      result += encBlock
-    
-    return result
-    
-def decryptCBC(key, data):
-    encBlocks = tools.split(data, 16, False)
-
-    iv = b'\000' * 16
-    result = b''
-    
-    cipher=AES.new(key, AES.MODE_ECB)
-    
-    for block in encBlocks:
-      decBlock = cipher.decrypt(block)
-      dec = crypto.xor(decBlock, iv)
-      iv = block
-      result += dec
-    return tools.stripPadding(result)
-
 HEADER=b"comment1=cooking%20MCs;userdata="
 TRAILER=b";comment2=%20like%20a%20pound%20of%20bacon"
 
@@ -86,29 +45,32 @@ def attackHeader(data):
     return newB1 + data[16:]
 
 def attackTail(data):
+    # modify second-last block
+    POS=len(data) - 2*16
 
     print(data)
-    expectedText = tools.addPadding(b'0of%20bacon')
+    expectedText = tools.addPadding(b'con')
+    #expectedText = tools.addPadding(b'0of%20bacon')
     injected = tools.addPadding(b';admin=true;')
-    b1 = data[64:80]
-    
+    b1 = data[POS:POS+16]
+
     newB1 = crypto.xor(expectedText, injected)
     newB1 = crypto.xor(newB1, b1)
     
-    return data[:64] + newB1 + data[80:]
+    return data[:POS] + newB1 + data[POS+16:]
 
 def adminCheck(data):
     adminStr = b";admin=true;"
     
-    return (data.find(adminStr) >= 0)
+    return (adminStr in data)
 
     
 def main(a=1):
     print("*** Alice")
-    key = genKey()
-    #print(key)
-    message = envelope(b"this is a message")
-    print(message)
+    key = crypto.genKey()
+    #message = envelope(b"this is a regular message")
+    message = envelope(b"dat=1;admin=true;")
+    print([len(message), message])
     cipherMsg = crypto.encryptCBC(key, message)
     #print(cipherMsg)
 
