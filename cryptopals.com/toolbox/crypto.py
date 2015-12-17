@@ -4,7 +4,7 @@ from Crypto.Cipher import AES
 from Crypto import Random
 
 __all__ = [ "genKey",
-            "xorBytes",
+            "xor",
             "encryptECB", "decryptECB",
             "encryptCBC", "decryptCBC",
             "encryptCTR" ]
@@ -48,11 +48,10 @@ def decryptECB(key, data):
 ###               AES CBC crypto with PKCS#7 padding                  ###
 #########################################################################
 
-def encryptCBC(key, data):
+def encryptCBC(key, data, iv = b'\000' * 16):
     data = tools.addPadding(data)
     blocks = tools.split(data, 16, False)
 
-    iv = b'\000' * 16
     result = b''
     
     cipher=AES.new(key, AES.MODE_ECB)
@@ -65,10 +64,9 @@ def encryptCBC(key, data):
     
     return result
     
-def decryptCBC(key, data):
+def decryptCBC(key, data, iv = b'\000' * 16):
     encBlocks = tools.split(data, 16, False)
 
-    iv = b'\000' * 16
     result = b''
     
     cipher=AES.new(key, AES.MODE_ECB)
