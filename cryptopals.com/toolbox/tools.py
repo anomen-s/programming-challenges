@@ -2,7 +2,7 @@ import base64
 import time
 
 __all__ = [ "d", "setDebug", "start", "end", "run",
-            "toStr", "toHex", "toB64", "fromB64", "fromHex",
+            "toStr", "toHex", "toB64", "fromB64", "fromHex", "readfile", "writefile"
             "transpose", "getDuplicateBlocks", "split", "stripPadding" ]
 
 #########################################################################
@@ -16,6 +16,7 @@ def setDebug(val=True):
     _DEBUG = val
 
 def d(args):
+    global _DEBUG
     if _DEBUG:
       print(args)
 
@@ -82,6 +83,16 @@ def fromHex(s):
       s = str(s, 'utf-8')
     return bytes.fromhex(s)
     
+
+def readfile(name):
+    with open(name,'rb') as f:
+      data = f.read()
+
+    return data
+
+def writefile(name,data):
+    with open(name,'wb') as f:
+      f.write(data)
 
 #########################################################################
 ###             Block operations                                      ###
