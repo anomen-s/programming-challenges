@@ -42,15 +42,18 @@ def search(n0, primes):
 
   maxD = (RANGE - n0) // 2
   for d in range(1,maxD):
+    if not primes[n0]:
+      continue
     n1 = n0 + d
     n2 = n1 + d
-    if (primes[n0] and primes[n1] and primes[n2] and isPerm(n0, n1,n2)):
+    if (primes[n1] and primes[n2] and isPerm(n0, n1,n2)):
       print(str(n0) + str(n1) + str(n2) + ' d=' + str(d))
     
 
 
 def main():
     primes = sieve(RANGE)
+    print('primes computed.')
     for i in range(RANGE):
       search(i, primes)
     
