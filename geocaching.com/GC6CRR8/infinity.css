@@ -21,11 +21,20 @@ body {
  font-weight:700;
  font-family:Arial,Helvetica,sans-serif;
 }
+#pageheader a {
+  text-decoration: none;
+}
+
 #infoheader {
   text-align:  left;
   color:       #594a42;
   font-size:   11px;
   font-family: Arial,Helvetica,sans-serif;
+}
+#mystery {
+  background-position: 10px 8px;
+  background-repeat: no-repeat;
+  background-image: url("images/8.png");
 }
 
 #en {
@@ -65,12 +74,12 @@ pre {
   width: 60px;
   height: 100%;
   background-image : url("images/infinity.png");
+  background-position: 5px 5px;
   background-repeat: no-repeat;
   float: right;
 }
 
 #infname {
-  
   padding: 10px;
   vertical-align: middle;
   height: 100%;
@@ -79,9 +88,11 @@ pre {
 }
 
 #messageicon {
+  background-position: 5px 10px;
   height: 100%;
-  width: 60px;
+  width: 40px;
   margin-top: 5px;
+
   background-image : url("images/message-center2x.png");
   background-repeat: no-repeat;
   float: right;
@@ -94,7 +105,8 @@ pre {
 }
 
 #messages {
-  padding: 10px;
+  
+  padding-top: 15px;
   vertical-align: middle;
   height: 100%;
   width: 400px;
