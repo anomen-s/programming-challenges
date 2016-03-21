@@ -23,12 +23,13 @@ echo "JavaScript.."
 java -jar target/yuicompressor.jar infinity.js > target/io.js
 
 head -n 5 infinity.html > target/i.html
-echo '<!--' >> target/i.html
-git rev-parse HEAD >> target/i.html
+echo '<!-- ' >> target/i.html
+#git rev-parse HEAD >> target/i.html
+git describe --always >> target/i.html
 echo " // "  >> target/i.html
 date >> target/i.html
 
-echo '-->' >> target/i.html
+echo ' -->' >> target/i.html
 
 echo '<style type="text/css">' >> target/i.html
 cat target/io.css >> target/i.html
@@ -44,3 +45,6 @@ tail -n +10 infinity.html >> target/i.html
 
 #xmllint --noblanks --xmlout --dropdtd  target/i.html -o target/ix.html
 tr -d '\n' < target/i.html > target/infinity.html
+
+echo DONE
+sleep 1
