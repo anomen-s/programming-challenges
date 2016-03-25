@@ -186,9 +186,11 @@ function next(buttonId, inc) {
  if (inc) {
   // button was pressed, get next value
   var nextFloat = flVal + 1.0;
+  //alert("INC: " + flVal + " - " + nextFloat);
   //alert('N: ' + nextFloat);
  
-  if (nextFloat == flVal) {
+  if (floattobits(nextFloat) == floattobits(flVal)) {
+    //alert("no change: curr " + flVal + " = " + nextFloat);
     var nextIntVal = intVal + 1;
     nextFloat = Bytes2Float32(nextIntVal);
   }
@@ -203,6 +205,7 @@ function next(buttonId, inc) {
  if (nextFloat == 0.0) {
    nextFloat = 'Start';
  }
+ //alert("SET: " +  nextBits + " / "+ nextFloat);
  document.getElementById(decr(buttonId)).value = nextFloat;
  return false;
 }
