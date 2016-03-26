@@ -4,7 +4,7 @@
 
 if [ -z "$1" ]
 then
- echo Missing parameter
+ echo "Missing parameter (zip file)"
  exit 1
 fi
 
