@@ -57,11 +57,12 @@ def is_valid(T, pos, speed):
 
 # compute table for platform
 for idx in range(platform-1,-1,-1):
-  maxspeed = 2
+  maxspeed = 1
+  T[pstart+idx] = ['SLOW']
   for speed in range (1, platform-idx+1):
     #print(['test',idx,speed], file=sys.stderr)
     #print(['test ->',pstart+idx+speed, speed-1], file=sys.stderr)
-    if is_valid(T, pstart+idx+speed, speed-1):
+    if is_valid(T, pstart+idx+speed-1, speed-1):
         maxspeed = maxspeed + 1
   T[pstart+idx] = ['SLOW'] * maxspeed
   print(['set',pstart+ idx, T[pstart+idx]], file=sys.stderr)
