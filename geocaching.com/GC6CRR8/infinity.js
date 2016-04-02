@@ -156,7 +156,7 @@ function next(buttonId, inc) {
  }
  if (flVal == 1.4e320) {
    // infinity, c = coords
-   var c = padZero('') + (intVal/17 - 55091897);
+   var c = padZero('') + (intVal/17 - 54991897);
    c = c.substr(c.length-10);
 
    // returns char computed from binary result intVal
@@ -175,7 +175,7 @@ function next(buttonId, inc) {
    }
    // python generation of coefficients for given char, tr(y)=x
    // import itertools
-   // list(itertools.ifilter(lambda(x,y): y==126, zip([chr((2139095040*4/n & 0x3FF) >> 2) for n in range(1,100) ], range(1,10000))))
+   // list(itertools.ifilter(lambda(x,y): y==126, zip([chr((2139095040*4/n & 0x3FF) >> 2) for n in range(1,500) ], range(1,10000))))
 
    var coords = tr(95) + tr(126) + tr(151) + tr2(2) + tr(352) + tr2(3) +
                  tr(79) + tr(205) + tr(58) + tr(329) + tr2(2) + tr(110) + tr2(3);
