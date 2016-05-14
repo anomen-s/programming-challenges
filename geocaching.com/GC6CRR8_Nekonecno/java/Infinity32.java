@@ -64,6 +64,11 @@ public class Infinity32
 //     System.out.println(encode(5.0));
      System.out.println(encode(133.0f));
      System.out.println(next(START));
+
+     System.out.println(decode("0" +"11101111" + "11111111111111111111110"));
+     System.out.println(decode("0" +"11101111" + "11111111111111111111111"));
+     System.out.println(decode("0" +"11110000" + "00000000000000000000000"));
+
   }
   
 }

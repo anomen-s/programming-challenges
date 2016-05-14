@@ -278,6 +278,19 @@ function  decr(str)
  }
  return c;
 }
+
+function doClicking(elementID) {
+ for (var c = 0; c < 10000; c++) {
+//   c = 0;
+//   alert('st ' + c);
+   next('WD^r[@]EQA', true);
+//   alert('x ' + c);
+//   next('WD^r[@]EQA', true);
+//   document.getElementById(elementID).click();
+//   alert('done ' + c);
+ }
+}
+
 /**
   unused
 */
@@ -286,3 +299,5 @@ function testF() {
    alert(decr('WD^r[@]EQA') == 'btnCounter');
 }
 */
+
+
