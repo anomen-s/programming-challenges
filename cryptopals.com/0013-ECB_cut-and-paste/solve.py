@@ -62,7 +62,7 @@ TRAILER=b"&uid=11&role=user"
 def profile_for(email):
     
     data = email.replace(b'%', b'%25')
-    data = email.replace(b'&', b'%26')
+    data = data.replace(b'&', b'%26')
     data = data.replace(b'=', b'%3d')
 
     data = HEADER + data + TRAILER
