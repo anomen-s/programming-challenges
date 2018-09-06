@@ -1,0 +1,11 @@
+prints sum and subtraction of two numbers in Fibonacci number system (FNS)
+
+usage:
+
+java -jar fib.zip [params]
+
+
+parameters:
+ -sum {number1} {number2}   parameters are numbers in FNS
+ -n {number1} {number2}     parameters are decimal numbers
+ -i                         prompts for two numbers in FNS

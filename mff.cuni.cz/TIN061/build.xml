@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." default="compile" name="FNS">
+
+  <description>Operations with numbersin Fibonacci number system</description>
+
+  <property name="mainclass" value="fib.Main" />
+
+  <property name="classes" location="classes" /> 
+  <property name="src" location="src" />
+  <property name="docs" location="docs" />
+  <property name="jarfile" location="fib.jar" />
+
+
+  <target name="init">
+
+    <mkdir dir="${docs}" />
+    <mkdir dir="${classes}" />
+
+  </target>
+
+  <target name="compile" depends="init" description="Compiles source">
+    <javac deprecation="on" debug="off" encoding="cp1250"
+           destdir="${classes}" srcdir="${src}"
+           includes="fib/**/*.java" />
+  </target>
+
+  <target name="run" depends="init,compile" description="Executes program">
+    <java fork="true" classname="${mainclass}" classpath="${classes}">
+    	<arg value="-i" />
+    </java>
+  </target>
+
+  <target name="pack" depends="init,compile" description="Builds executable JAR archive">
+    <jar destfile="${jarfile}" basedir="${classes}" includes="fib/**/*.*">
+     <manifest>
+      <attribute name="Main-Class" value="${mainclass}" />
+     </manifest>
+    </jar>
+  </target>
+
+  <target name="docs" depends="init" description="Generates Javadoc">
+    <javadoc sourcepath="${src}" destdir="${docs}" Package="true"
+	     Encoding="cp1250" charset="utf-8" docencoding="utf-8" >
+      <tag name="todo" description="To Do:" />
+      <package name="fib" />
+    </javadoc>
+  </target>
+
+  <target name="all" depends="init,compile,pack,docs" description="builds all">
+  </target>
+
+  <target name="clean" description="Deletes .class files, .jar files, and generated documentation">
+    <delete dir="${classes}/fib" />
+    <delete dir="${docs}" />
+    <delete file="${jarfile}" />
+  </target>
+
+</project>
