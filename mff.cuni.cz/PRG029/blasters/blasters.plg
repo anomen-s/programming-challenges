@@ -1,0 +1,71 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: blasters - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "F:\TEMP\RSP62.tmp" with contents
+[
+/nologo /Zp4 /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\STUDIUM\blasters\blasters\blasters.cpp"
+]
+Creating command line "cl.exe @F:\TEMP\RSP62.tmp" 
+Creating temporary file "F:\TEMP\RSP63.tmp" with contents
+[
+winmm.lib ws2_32.lib OpenGL32.lib Glu32.lib lib/glpngd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/blasters.pdb" /debug /machine:I386 /out:"Debug/blasters.exe" /pdbtype:sept 
+.\Debug\ai.obj
+.\Debug\blasters.obj
+.\Debug\client.obj
+.\Debug\game.obj
+.\Debug\gamedata.obj
+.\Debug\glgame.obj
+.\Debug\glinit.obj
+.\Debug\globals.obj
+.\Debug\gltext.obj
+.\Debug\gltools.obj
+.\Debug\inet.obj
+.\Debug\keyb.obj
+.\Debug\logger.obj
+.\Debug\menu.obj
+.\Debug\netdata.obj
+.\Debug\server.obj
+.\Debug\StdAfx.obj
+]
+Creating command line "link.exe @F:\TEMP\RSP63.tmp"
+<h3>Output Window</h3>
+Compiling...
+blasters.cpp
+Linking...
+Creating temporary file "F:\TEMP\RSP64.tmp" with contents
+[
+/nologo /o"Debug/blasters.bsc" 
+.\Debug\ai.sbr
+.\Debug\blasters.sbr
+.\Debug\client.sbr
+.\Debug\game.sbr
+.\Debug\gamedata.sbr
+.\Debug\glgame.sbr
+.\Debug\glinit.sbr
+.\Debug\globals.sbr
+.\Debug\gltext.sbr
+.\Debug\gltools.sbr
+.\Debug\inet.sbr
+.\Debug\keyb.sbr
+.\Debug\logger.sbr
+.\Debug\menu.sbr
+.\Debug\netdata.sbr
+.\Debug\server.sbr
+.\Debug\StdAfx.sbr]
+Creating command line "bscmake.exe @F:\TEMP\RSP64.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+blasters.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,4 @@
+[bot]Bill
+[bot]Bob
+[bot]Bud
+[bot]Buck
