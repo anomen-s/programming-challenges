@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<messages>
+    <message>
+        <date>DD.MM.YYYY HH:MM:SS</date>
+        <dateenc>YYYYMMDDHHMMSS</dateenc>
+        <text></text>
+        <telephone>phone number</telephone>
+        <contact>contact name</contact>
+        <folder>1=rcvd;4=sent;6=read</folder>
+        <stat>Received/Read/Sent</stat>
+    </message>
+    
+<messages>
+
+-->
+
+  <xs:element name="messages">
+      <xs:complexType>
+        <xs:sequence>
+    	    <xs:element name="message" type="messageType" minOccurs="0" maxOccurs="unbounded" />
+    	</xs:sequence>    
+      </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="messageType">
+    	     
+    		<xs:all>
+    		    <xs:element name="date" type="xs:string" minOccurs="0"/>
+    		    <xs:element name="dateenc" type="dateencType" minOccurs="0" />
+    		    <xs:element name="text" type="textType" />
+    		    <xs:element name="telephone" type="telephoneType" />
+    		    <xs:element name="contact" type="xs:string" minOccurs="0" />
+    		    <xs:element name="folder" type="folderType" minOccurs="0" />
+    		    <xs:element name="stat" type="statType" minOccurs="0" />
+    		</xs:all>
+    </xs:complexType>
+
+    
+    <xs:complexType name="textType" mixed="true">
+    		<xs:sequence>
+    		    <xs:element name="br" type="brType" minOccurs="0" maxOccurs="unbounded" />
+    		</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="brType">
+        <xs:complexContent>
+    	    <xs:restriction base="xs:anyType"/>
+	</xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="folderType"> <!-- deprecated -->
+	<xs:restriction base="xs:int">
+	    <xs:minInclusive value="0"/>
+	    <xs:maxInclusive value="4"/>
+	</xs:restriction>
+    </xs:simpleType>
+                                
+
+    <xs:simpleType name="statType">
+	<xs:restriction base="xs:string">
+	    <xs:enumeration value="Sent"/>
+	    <xs:enumeration value="Received"/>
+	    <xs:enumeration value="Read"/> <!-- deprecated -->
+	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="telephoneType">
+	<xs:restriction base="xs:string">
+	    <xs:pattern value="[+]?\d{3,12}" />
+	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="dateencType">
+	<xs:restriction base="xs:string">
+	    <!--               year     month day    hour   min    sec        -->
+	    <xs:pattern value="[12]\d{3}[01]\d[0-3]\d[0-2]\d[0-5]\d(:?\d{2})?" />
+	</xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
