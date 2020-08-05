@@ -13,6 +13,8 @@ http://codecondo.com/coding-challenges/
 ##Notable tasks
 * projecteuler.net/0096-Su_Doku 
 
+##Notable smegheads
+https://github.com/github/dmca/blob/master/2018/2018-10-09-RootMe.md
 
 ##Links
 https://en.wikibooks.org/wiki/X86_Disassembly/Disassemblers_and_Decompilers

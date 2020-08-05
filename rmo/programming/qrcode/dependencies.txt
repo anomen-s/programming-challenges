@@ -1,0 +1,6 @@
+http://repo1.maven.org/maven2/com/google/zxing/
+* core
+* javase
+
+oracle-jdk-bin-1.7
+* in /usr/lib/jvm/oracle-jdk-bin-1.7
