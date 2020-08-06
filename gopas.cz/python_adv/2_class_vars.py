@@ -1,12 +1,11 @@
 class Person:
     Person_id = 1
 
-    def __init__(self, name = None):
+    def __init__(self, name=None):
         self.__name = name
         self.__age = 0
         self.id = Person.Person_id
         __class__.Person_id += 1
-
 
     def resetId(cls):
         cls.Person_id = 1
@@ -53,8 +52,8 @@ class Person:
     def age(self):
         self.__age = 0;
 
-print([Person().id for i in range(3)])
 
+print([Person().id for i in range(3)])
 
 Person.incId(10)
 
@@ -82,3 +81,12 @@ except ValueError as e:
 
 del p1.age
 print(p1.name, p1.age)
+
+
+# dynamically create new method
+def newMethod(self):
+    print('newMethod')
+
+
+Person.newmeth = newMethod
+p1.newmeth()

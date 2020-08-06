@@ -29,3 +29,7 @@ print(*islice(rand(), 100))
 
 
 print(*islice(rcomp(), 100))
+
+gen = rcomp()
+
+print([next(gen) for _ in range(10)])

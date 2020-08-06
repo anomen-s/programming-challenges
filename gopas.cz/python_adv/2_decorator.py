@@ -69,9 +69,9 @@ import time
 
 def timed(f1):
     def decF(*args, **kw):
-        start = time.time()
+        start = time.perf_counter()
         result = f1(*args, **kw)
-        dur = time.time() - start
+        dur = time.perf_counter() - start
         print('duration', dur)
         return result
 
