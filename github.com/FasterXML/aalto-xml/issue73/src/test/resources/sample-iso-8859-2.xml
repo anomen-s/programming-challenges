@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<nodes xmlns="http://example.com/test">
+    <node>
+        <name>Node 1 <!-- ěščřžýáíéěščřžýáíé &#8801;&#8801;&#8801;&#8801;&#8801; &#8240;&#8240;   &#8240;&#8240; --> 1</name>
+        <price>100</price>
+        <flag/>
+    </node>
+    <node>
+        <name>Node 2</name>
+        <price>23</price>
+    </node>
+    <node>
+        <name>Node 3</name>
+        <price>12.4</price>
+        <resources>
+            <resource type="test">Hello 1</resource><resource type="test1">Hello 2</resource>
+        </resources>
+    </node>
+</nodes>
