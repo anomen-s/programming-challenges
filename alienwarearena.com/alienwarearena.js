@@ -1,31 +1,37 @@
-var AA={};
+var AA = {};
 
-AA.delay = 12 * 3600 * 1000;
+AA.index = 0;
 
-AA.html = function(p) {
-  console.log(new Date().toLocaleString() + ': get page: ' + p);
-  setTimeout(()=>AA.html(p), AA.delay);
-  $.get(p, function(data) {});
+AA.pages = [
+'/ucf/Giveaway',
+'/rewards/leaderboard',
+'/ucf/Video',
+'/account',
+'/experiences',
+'/ucf/News'];
+
+AA.lastPage = '';
+
+AA.delay = function() {
+ return 3600 * 1000 * 24 / AA.pages.length;
 }
 
-AA.pages=[
-'https://eu.alienwarearena.com/ucf/Giveaway',
-'https://eu.alienwarearena.com/rewards/leaderboard',
-'https://eu.alienwarearena.com/ucf/Video',
-'https://eu.alienwarearena.com/account',
-'https://eu.alienwarearena.com/experiences',
-'https://eu.alienwarearena.com/ucf/News'];
+AA.html = function() {
+  const p = AA.pages[AA.index % AA.pages.length];
+  console.log(new Date().toLocaleString() + ': get page[' + AA.index + ']: ' + p);
+  setTimeout(()=>AA.html(), AA.delay());
+  AA.index++;
+  $.get(p, AA.logResult);
+}
 
+AA.logResult = function(data) {
+  console.log(data);
+  AA.lastPage = data;
+}
 
+AA.start = function() {
 
-AA.start=function() {
-  i = 1;
-  for (const p of AA.pages) {
-    i++;
-    const delay = i * 10 * 1000;
-    console.log(new Date().toLocaleString() + ': start page: ' + p);
-    setTimeout(()=>AA.html(p), delay);
-  }
+  AA.html();
 
   $('.wrapper').hide();
 
