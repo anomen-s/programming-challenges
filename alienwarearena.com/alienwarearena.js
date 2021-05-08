@@ -8,7 +8,8 @@ AA.pages = [
 '/ucf/Video',
 '/account',
 '/experiences',
-'/ucf/News'];
+'/ucf/News',
+'/rewards'];
 
 AA.lastPage = '';
 
@@ -25,7 +26,7 @@ AA.html = function() {
 }
 
 AA.logResult = function(data) {
-  console.log(data);
+  console.log(data.substring(0, 1500));
   AA.lastPage = data;
 }
 
