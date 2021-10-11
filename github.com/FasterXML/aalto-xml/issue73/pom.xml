@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.fasterxml</groupId>
             <artifactId>aalto-xml</artifactId>
-            <version>1.2.2</version>
+            <version>1.2.2.5</version>
         </dependency>
 
         <dependency>

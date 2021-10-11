@@ -63,20 +63,26 @@ public class StaxTest {
     @Test
     public void testUtf16() throws XMLStreamException {
 
-        Assertions.assertEquals(0x360, test("sample-utf16.xml"));
+        Assertions.assertEquals(0x360/2, test("sample-utf16.xml"));
+    }
+
+    @Test
+    public void testUtf16Space() throws XMLStreamException {
+
+        Assertions.assertEquals(0x36C/2, test("sample-utf16-space.xml"));
     }
 
     @Test
     public void testUtf16Bom() throws XMLStreamException {
 
-        Assertions.assertEquals(0x362, test("sample-utf16-bom.xml"));
+        Assertions.assertEquals(0x362/2, test("sample-utf16-bom.xml"));
     }
 
     @Test
     public void testUtf16BomNoProlog() throws XMLStreamException {
 
         // this passes - when counting chars, not bytes and excluding BOM
-        Assertions.assertEquals((0x312-2)/2, test("sample-utf16-bom-no-prolog.xml"));
+//        Assertions.assertEquals((0x312-2)/2, test("sample-utf16-bom-no-prolog.xml"));
 
         Assertions.assertEquals(0x312/2, test("sample-utf16-bom-no-prolog.xml"));
 
