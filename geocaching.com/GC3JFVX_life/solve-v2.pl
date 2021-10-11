@@ -26,5 +26,5 @@ solve(Res) :-
 	DEFG < 1000,
 	KLMN is K + L + M + N,
 	KLMN < 1000,
-	Res = [[A,B,C,D,E,F,G,H,I,J,K,L,M,N], (A, [B,C], DEFG), e(H,[I,J], KLMN)].
+	Res = [[A,B,C,D,E,F],[G,H,I,J,K],[L,M,N], (A, [B,C], DEFG), e(H,[I,J], KLMN)].
 	
