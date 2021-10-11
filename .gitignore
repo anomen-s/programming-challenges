@@ -61,3 +61,6 @@ target/
 .idea
 
 _SRC
+
+# PyCharm
+gopas.cz/python_adv/venv
