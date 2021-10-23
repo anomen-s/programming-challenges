@@ -1,0 +1,3 @@
+#!/bin/sh
+java -classpath ./build/classes -Djava.security.policy=./policy Stats
+#java -classpath ./build/classes -Djava.security.policy=./policy MainSearcherClient

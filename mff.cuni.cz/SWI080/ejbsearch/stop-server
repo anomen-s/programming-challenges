@@ -1,0 +1,5 @@
+#!/bin/sh
+export OPENEJB_HOME="$HOME/MWy/OpenEJB"
+
+cd $OPENEJB_HOME
+bin/openejb stop

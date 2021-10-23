@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+	<!-- Persistece unit name (corresponds to unitName in the @PersistenceContext annotation -->
+	<persistence-unit name="node-unit">
+		<!-- Database names -->
+		<jta-data-source>java:openejb/Resource/nodeDatabase</jta-data-source>
+		<non-jta-data-source>java:openejb/Resource/nodeDatabaseUnmanaged</non-jta-data-source>
+		<!-- Names of entities to persist in this unit -->
+		<class>mwy.Node</class>
+		
+		<properties>
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+		</properties>
+	</persistence-unit>
+</persistence>

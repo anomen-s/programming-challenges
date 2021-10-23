@@ -1,0 +1,6 @@
+#!/bin/sh
+export OPENEJB_HOME="$HOME/MWy/OpenEJB"
+
+java -cp \
+    $OPENEJB_HOME/lib/openejb-client-3.0.jar:$OPENEJB_HOME/lib/javaee-api-5.0-1.jar:$OPENEJB_HOME/lib/openjpa-1.0.1.jar:dist/ejbsearch.jar \
+    ejbsearch.Main

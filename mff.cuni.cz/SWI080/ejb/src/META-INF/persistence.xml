@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+	<!-- Persistece unit name (corresponds to unitName in the @PersistenceContext annotation -->
+	<persistence-unit name="movie-unit">
+		<!-- Database names -->
+		<jta-data-source>java:openejb/Resource/movieDatabase</jta-data-source>
+		<non-jta-data-source>java:openejb/Resource/movieDatabaseUnmanaged</non-jta-data-source>
+		<!-- Names of entities to persist in this unit -->
+		<class>mwy.Movie</class>
+		<class>mwy.Director</class>
+		
+		<properties>
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+		</properties>
+	</persistence-unit>
+</persistence>

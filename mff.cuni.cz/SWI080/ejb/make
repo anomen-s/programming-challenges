@@ -1,0 +1,14 @@
+#!/bin/sh
+export OPENEJB_HOME="$HOME/MWy/OpenEJB"
+
+rm -f dist/ejb.jar
+
+mkdir -p build/classes/META-INF dist
+# server-side beans compilation
+cp  src/META-INF/persistence.xml build/classes/META-INF/
+
+javac -cp $OPENEJB_HOME/lib/javaee-api-5.0-1.jar -d build/classes src/mwy/*.java src/client/*.java
+jar cvMf dist/ejb.jar -C build/classes .
+
+# client compilation
+#javac -cp client.jar *.java

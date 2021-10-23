@@ -1,0 +1,12 @@
+#!/bin/sh
+
+ant clean
+ant compile 
+( cd build/classes && rmic ServerImpl && echo rmic. )
+#java -Xss10m -classpath ./build/classes -Djava.rmi.server.codebase=file:`pwd`/build/classes/ -Djava.rmi.server.hostname=localhost -Djava.security.policy=./policy SearcherServer
+
+java -Xss16m \
+     -classpath build/classes \
+     -Djava.rmi.server.codebase=file:`pwd`/build/classes/ \
+     -Djava.security.policy=policy \
+     SearcherServer

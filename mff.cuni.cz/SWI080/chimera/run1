@@ -1,0 +1,5 @@
+#!/bin/sh
+
+make
+
+./chat 5000 sv

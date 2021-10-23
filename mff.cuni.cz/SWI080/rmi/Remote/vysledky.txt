@@ -1,0 +1,42 @@
+2. Vzdaleny Searcher
+
+* MainSearcherClient / SearcherServer
+
+* predavani parametru: searcheru se predavaji oba uzly v serializovane podobe - tj. vcetne vsech referenci, 
+ takze se prenese cela souvisla komponenta, ve ktere dany uzel lezi. serializace zarucuje referencni integritu,
+ takze se kazdy dostupny uzel prenasi prave jednou, i kdyz je dostupny z obou prenasenych uzlu.
+
+* doba behu zavisi na hustote grafu (tj. kolik uzlu se musi serializovat)
+* serializace se provadi pouze jednou
+
+3.
+* MainNodeClient / SearcherServer
+
+* searcher pracuje s proxy objekty, ktere predavaji volani metody skutecnemu NodeImplRMI objektu na serveru.
+ kdyz searcher zavola node.getNeighbors() dostane Set obsahujici dalsi proxy objekty. tento Set se 
+ prenasi pomoci serializace.
+
+ Factory klientovi tedy posila pouze reference.
+
+4.
+* MainClientOnly / SearcherServer
+
+* klient zavola searcher a preda mu jako parametry proxy a rmi na serveru jim muze priradit konkretni objekty
+  a zavolat searcher na prislusne nody.
+
+* zde vetsinu casu spotrebuje server, protoze klient pouze vola metody na serveru a prenaseji se pouze reference
+
+
+
+priblizna doba 50 nahodnych behu pro jednotlive ulohy v ms:
+
+no rmi : 131
+RMI nodes : 6735
+rmi searcher : 763
+nodes/searcher RMI : 5480
+
+5.
+rychlost pri RMI po siti se mi nepodarilo zjistit, protoze vsechny pokusy skoncily chybou:
+
+SearcherClient Exception: Connection refused to host: localhost; nested exception is:
+        java.net.ConnectException: Connection refused

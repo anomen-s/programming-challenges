@@ -1,0 +1,61 @@
+module consts
+{
+	const unsigned long MAX_LEN = 8;
+};
+
+module master
+{
+	interface instance_i;
+	
+	typedef string<consts::MAX_LEN> bounded_string_t;
+	typedef sequence<octet> octet_sequence_t;
+	
+	enum switch_t
+	{
+		vshort,
+		vlong,
+		vlong_long,
+		vulong
+	};
+	
+	union count_t switch (switch_t)
+	{
+		case vshort:     short short_value;
+		case vlong:      long long_value;
+		case vlong_long: long long long_long_value;
+		default:         unsigned long ulong_value;
+	};
+	
+	struct request_t
+	{
+		count_t index;
+		any data;
+	};
+	
+	interface server_i
+	{
+		exception connection_e
+		{
+			string cause;
+		};
+		
+		short ping(in short val);
+		instance_i connect(inout bounded_string_t peer, inout long long key) raises (connection_e);
+	};
+	
+	interface instance_i
+	{
+		exception protocol_e
+		{
+			string cause;
+		};
+		
+		readonly attribute boolean idle;
+		attribute boolean ready;
+		
+		void get_status(in string s_key, inout count_t cnt, out octet_sequence_t status) raises (protocol_e);
+		boolean request(in request_t req) raises (protocol_e);
+		
+		oneway void disconnect();
+	};
+};
