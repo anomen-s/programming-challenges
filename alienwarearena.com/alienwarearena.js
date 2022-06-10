@@ -7,6 +7,7 @@ AA.pages = [
 '/rewards/leaderboard',
 '/ucf/Video',
 '/account',
+'/marketplace',
 '/experiences',
 '/ucf/News',
 '/rewards'];
@@ -26,8 +27,15 @@ AA.html = function() {
 }
 
 AA.logResult = function(data) {
-  console.log(data.substring(0, 1500));
+  // console.log(data.substring(0, 1500));
   AA.lastPage = data;
+  AA.ok();
+}
+
+AA.ok = function() {
+  const res = AA.lastPage.indexOf('um-main-info') > 100;
+  console.log(new Date().toLocaleString() + ': ok[' + (AA.index-1) + ']: ' + res);
+  return res;
 }
 
 AA.start = function() {
@@ -38,3 +46,5 @@ AA.start = function() {
 
   return 'started';
 }
+
+AA.start();
