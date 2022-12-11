@@ -18,7 +18,7 @@ def read_input(final):
 def visibility(field):
     w = len(field[0])
     h = len(field)
-    result = [[0] * w for i in range(h)]
+    result = [[0] * w for _ in range(h)]
     visibility_scan(field, result, [1, 0], [[0, y] for y in range(h)])
     visibility_scan(field, result, [-1, 0], [[w - 1, y] for y in range(h)])
     visibility_scan(field, result, [0, 1], [[x, 0] for x in range(w)])
