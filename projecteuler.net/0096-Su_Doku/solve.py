@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import copy
+import sys
 # board = list(rows) of list(cells) of list(avail)
 
 def printBoard(board):
@@ -18,6 +19,7 @@ def printBoard(board):
         else:
           print cell[0],
       print ''
+    print '======================='
 
 def inflateBoard(board):
     sets = []
@@ -126,6 +128,7 @@ def eliminateBoard(board):
       for s in sets:
         changed = changed or elim(s)
         changed = changed or clean(s)
+      printBoard(board)
     return board
 
 def solve(board):
@@ -134,15 +137,15 @@ def solve(board):
     eliminateBoard(board)
 
 #    for r in board:print r
-#    printBoard(board)
+    printBoard(board)
     #print (board[0][0:3])
     
     if not isSolved(board):
-      #print 'not solved'
+      print 'Not solved without guessing!'
       for guesses in [1]: # seems to be enough
         gboard = guess(board, guesses)
         if gboard and isSolved(gboard):
-          #printBoard(board)
+          printBoard(board)
           return gboard
 
     return board
@@ -151,7 +154,7 @@ def solve(board):
 def main():
   RES = 0;
   
-  with open('p096_sudoku.txt', 'r') as f:
+  with open(sys.argv[1] if len(sys.argv) > 1 else 'p096_sudoku.txt', 'r') as f:
     lines = f.readlines() # read all lines from file
 
   while len(lines) > 0:
@@ -163,7 +166,7 @@ def main():
     r = solve(board)
     printBoard(r)
     if not isSolved(r):
-      print("not solved")
+      print("not solved!!!")
       exit(1)
     
     RES = RES + reduce(lambda x,y: x*10+y[0], r[0][0:3],0)
