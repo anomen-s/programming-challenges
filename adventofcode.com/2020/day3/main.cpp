@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 #include <iostream>
 #include <vector>
@@ -12,7 +13,7 @@ void trim(char* buffer) {
   if (cr) *cr = 0;
 }
 
-long walk(std::vector<char*> &lines, int incx, int incy) {
+int32_t walk(std::vector<char*> &lines, int incx, int incy) {
   int x = 0;
   int cnt = 0;
   int width = strlen(lines[0]);
@@ -39,8 +40,8 @@ void process_file(bool final) {
   }
   fclose(fptr);
 
-  long p1 = walk(lines, 3, 1);
-  long p2 = walk(lines, 1, 1) * p1 * walk(lines, 5, 1) * walk(lines, 7, 1) * walk(lines, 1, 2);
+  int64_t p1 = walk(lines, 3, 1);
+  int64_t p2 = walk(lines, 1, 1) * p1 * walk(lines, 5, 1) * walk(lines, 7, 1) * walk(lines, 1, 2);
   std::cout << "Result: \t" << p1 << "\t" << p2 << "\n";
 }
 
