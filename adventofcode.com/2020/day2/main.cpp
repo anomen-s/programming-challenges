@@ -57,12 +57,14 @@ void process_file(int final) {
       // << " " << rec->pass << " -> " << valid << "\n";
     }
   }
-  std::cout << "Valid(" << final << "): " << valid1 << "\t" << valid2 << "\n";
+  std::cout << "Result: \t" << valid1 << "\t" << valid2 << "\n";
   fclose(fptr);
 }
 
 int main(int argc, char *argv[]) {
+  std::cout << "*** Sample ***" << std::endl << "Expected:\t2\t1" << std::endl;
   process_file(false);
+  std::cout << "*** Final ****" << std::endl << "Expected:\t638\t699" << std::endl;
   process_file(true);
   return 0;
 }

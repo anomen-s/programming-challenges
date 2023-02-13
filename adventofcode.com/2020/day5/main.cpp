@@ -40,7 +40,7 @@ void process_file(bool final) {
   cout << "Result: \t" << max_id << "\t";
 
   // part 2
-  for (size_t i = 1; i < size(occupied)-1; i++) {
+  for (size_t i = 1; i < (sizeof(occupied)/sizeof(bool))-1; i++) {
     if ((!occupied[i]) && occupied[i-1] && occupied[i+1]) {
       cout << i << endl;
     }
