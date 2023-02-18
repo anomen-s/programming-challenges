@@ -30,7 +30,7 @@ int64_t compute_differences(const vector<int> &values) {
   return cnt1 * cnt3;
 }
 
-long compute_arrangements(const vector<int> &values) {
+int64_t compute_arrangements(const vector<int> &values) {
 
   size_t s = values.size();
   vector<int64_t> tab;
@@ -72,7 +72,7 @@ void process_file(bool final, char part) {
 
   fclose(fptr);
 
-  // add 0 and last+3 as per design and sort list
+  // add 0 and last+3 as per design and sort the list
   msg.push_back(0);
   sort(msg.begin(), msg.end());
   msg.push_back(msg[msg.size()-1]+3);
