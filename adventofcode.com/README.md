@@ -12,6 +12,7 @@
 11. board game simulation
 12. board walk
 13. modular arithmetics, CRT
+14. RAM writes simulation
 
 # 2022 (Python)
 1. Sorted list
