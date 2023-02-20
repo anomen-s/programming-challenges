@@ -1,4 +1,4 @@
-CFLAGS=-g -O2 -Wall -std=c++14 -pedantic
+CFLAGS=-g -O2 -Wall -std=c++14 -pedantic  -fstack-protector -Wno-psabi
 
 TARGET=target
 COMPILER=g++

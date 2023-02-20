@@ -1,4 +1,4 @@
-CFLAGS=-g -O2 -Wall
+CFLAGS=-g -O2 -Wall -fstack-protector -fsanitize=undefined -ftrapv
 
 TARGET=target
 COMPILER=g++
