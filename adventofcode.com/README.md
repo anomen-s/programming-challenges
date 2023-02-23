@@ -13,6 +13,9 @@
 12. board walk
 13. modular arithmetics, CRT
 14. RAM writes simulation
+15. sequence generation and search
+16. data validation
+17. 3D Game of Life
 
 # 2022 (Python)
 1. Sorted list
