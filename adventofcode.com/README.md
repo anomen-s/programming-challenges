@@ -1,5 +1,5 @@
 # 2020 (C++)
-1. Sorted list
+1. Sorted list (Python)
 2. string parsing
 3. board walk
 4. dictionary processing
@@ -15,7 +15,7 @@
 14. RAM writes simulation
 15. sequence generation and search
 16. data validation
-17. 3D Game of Life
+17. 3D and 4D Game of Life (C++, Python)
 
 # 2022 (Python)
 1. Sorted list
