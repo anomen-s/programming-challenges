@@ -16,6 +16,7 @@
 15. sequence generation and search
 16. data validation
 17. 3D and 4D Game of Life (C++, Python)
+18. Numerical expression evaluation
 
 # 2022 (Python)
 1. Sorted list
