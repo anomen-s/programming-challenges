@@ -73,7 +73,7 @@ def compute_sim(space, dim, diameter):
         else:
             space = simulate_step4(space, diameter+step)
 
-        print(("%s..." % len(space)), end='', flush=True)
+        print(("%s...\t" % len(space)), end='', flush=True)
 
     print('|')
     #print(space)
