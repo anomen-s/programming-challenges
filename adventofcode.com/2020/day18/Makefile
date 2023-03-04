@@ -1,4 +1,4 @@
-CFLAGS=-g -O2 -Wall -march=native -std=c++17 -pedantic -fstack-protector -fsanitize=undefined -ftrapv
+CFLAGS=-g -O2 -Wall -Wno-psabi -march=native -std=c++17 -pedantic -fstack-protector -fsanitize=undefined -ftrapv
 
 TARGET=target
 COMPILER=g++

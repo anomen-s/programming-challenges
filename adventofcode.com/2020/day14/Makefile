@@ -1,4 +1,4 @@
-CFLAGS=-g -O2 -Wall -fstack-protector -fsanitize=undefined -ftrapv
+CFLAGS=-g -O2 -Wall -fstack-protector -fsanitize=undefined -ftrapv -Wno-psabi
 #CFLAGS=-g -O0
 
 TARGET=target

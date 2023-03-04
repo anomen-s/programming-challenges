@@ -11,12 +11,12 @@ using namespace std;
  * Check if value belongs to given ranges and assign proper ranges to table columns.
  */
 
-typedef struct {
+struct Input {
   vector<vector<long>> fields;
   vector<long> own_ticket;
   vector<vector<long>> tickets;
   vector<vector<long>> valid_tickets;
-} Input;
+};
 
 
 bool check_rule(const vector<long> &field, long value) {
@@ -29,7 +29,8 @@ bool check_rule(const vector<long> &field, long value) {
   return false;
 }
 
-bool contains(const vector<int> &vec, const int val) {
+template<typename T>
+bool contains(const vector<T> &vec, const T val) {
   return find(vec.begin(), vec.end(), val) != vec.end();
 }
 
@@ -124,7 +125,7 @@ vector<int> assign_fields(const Input &input) {
   return result;
 }
 
-long get_departure_data(const Input &input) {
+int64_t get_departure_data(const Input &input) {
   int64_t result = 1;
   vector<int> fieldpos = assign_fields(input);
   // product of first 6 fields "departure*"
