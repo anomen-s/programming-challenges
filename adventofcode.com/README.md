@@ -17,6 +17,7 @@
 16. data validation
 17. 3D and 4D Game of Life (C++, Python)
 18. Numerical expression evaluation
+19. Simple regexp matching
 
 # 2022 (Python)
 1. Sorted list

@@ -57,10 +57,8 @@ vector<size_t> matches(const Matcher &matcher, size_t pos, int rule_id) {
 
   auto sub_matches = vector_matches(matcher, pos, rule.a);
   if (rule.b.size() > 0) {
-    auto sub_matches_b = vector_matches(matcher, pos, rule.b);
-    for (auto b: sub_matches_b) {
-      sub_matches.push_back(b);
-    }
+    const auto sub_matches_b = vector_matches(matcher, pos, rule.b);
+    extend_vector(sub_matches, sub_matches_b);
   }
 
   return sub_matches;
@@ -110,7 +108,7 @@ vector<int> parse_int_list(const string &ids) {
 
 template<typename T>
 void extend_vector(vector<T> &target, const vector<T> &src) {
-  for (size_t item: src)
+  for (T item: src)
     if (find(target.begin(), target.end(), item) == target.end())
       target.push_back(item);
 }
