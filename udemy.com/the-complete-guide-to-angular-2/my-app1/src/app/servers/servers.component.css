@@ -5,3 +5,11 @@ h1 {
 h3 {
   color: Blue;
 }
+
+div {
+  color: #AA00AA;
+}
+
+.confirmation {
+  color: #AA0000;
+}

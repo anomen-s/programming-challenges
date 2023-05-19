@@ -1,2 +1,4 @@
-<h3>server Hello!</h3>
-<p>{{'server' }} with id {{ serverId }} is {{ getServerStatus() }}</p>
+<h3>Hello from server {{ serverId }}!</h3>
+<p [ngStyle]="{'background-color': getColor()}" [ngClass]="{online:serverStatusStr === 'on'}">
+  {{'server' }} with id {{ serverId }} is {{ getServerStatus() }}
+</p>
