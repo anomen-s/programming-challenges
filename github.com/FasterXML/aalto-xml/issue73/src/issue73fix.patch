@@ -1,0 +1,55 @@
+commit 0aad57a67b2de5ad7bd8159e7a136146482fdde4
+Author: anomen <ludek.h@gmail.com>
+Date:   Wed Nov 22 15:00:27 2023 +0100
+
+    fix issue #73
+
+diff --git a/src/main/java/com/fasterxml/aalto/in/ByteSourceBootstrapper.java b/src/main/java/com/fasterxml/aalto/in/ByteSourceBootstrapper.java
+index 55e8edf..45fddf5 100644
+--- a/src/main/java/com/fasterxml/aalto/in/ByteSourceBootstrapper.java
++++ b/src/main/java/com/fasterxml/aalto/in/ByteSourceBootstrapper.java
+@@ -173,12 +173,13 @@ public final class ByteSourceBootstrapper
+             }
+             Reader r = new Utf32Reader(_config, _in, _inputBuffer, _inputPtr, _inputLen,
+                                        mBigEndian);
+-            return new ReaderScanner(_config, r);
++            return new ReaderScanner(_config, r,  _inputPtr / mBytesPerChar);
+         }
+ 
+         // And finally, if all else fails, we'll also fall back to
+         // using JDK-provided decoders and ReaderScanner:
+         InputStream in = _in;
++        int pastChars = _inputPtr / mBytesPerChar;
+         if (_inputPtr < _inputLen) {
+             in = new MergedStream(_config, in, _inputBuffer, _inputPtr, _inputLen); // lgtm [java/input-resource-leak]
+         }
+@@ -186,7 +187,8 @@ public final class ByteSourceBootstrapper
+             normEnc = mBigEndian ? CharsetNames.CS_UTF16BE : CharsetNames.CS_UTF16LE;
+         }
+         try {
+-            return new ReaderScanner(_config, new InputStreamReader(in, normEnc));
++            Reader r = new InputStreamReader(in, normEnc);
++            return new ReaderScanner(_config, r, pastChars);
+         } catch (UnsupportedEncodingException usex) {
+             throw new IoStreamException("Unsupported encoding: "+usex.getMessage());
+         }
+diff --git a/src/main/java/com/fasterxml/aalto/in/ReaderScanner.java b/src/main/java/com/fasterxml/aalto/in/ReaderScanner.java
+index 074d9a9..711f328 100644
+--- a/src/main/java/com/fasterxml/aalto/in/ReaderScanner.java
++++ b/src/main/java/com/fasterxml/aalto/in/ReaderScanner.java
+@@ -92,13 +92,13 @@ public final class ReaderScanner
+         _symbols = cfg.getCBSymbols();
+    }
+ 
+-    public ReaderScanner(ReaderConfig cfg, Reader r)
++    public ReaderScanner(ReaderConfig cfg, Reader r, int pastBytesOrChars)
+     {
+         super(cfg);
+         _in = r;
+         _inputBuffer = cfg.allocFullCBuffer(ReaderConfig.DEFAULT_CHAR_BUFFER_LEN);
+         _inputPtr = _inputEnd = 0;
+-        _pastBytesOrChars = 0; // should it be passed by caller?
++        _pastBytesOrChars = pastBytesOrChars;
+         _rowStartOffset = 0; // should probably be passed by caller...
+ 
+         _symbols = cfg.getCBSymbols();
