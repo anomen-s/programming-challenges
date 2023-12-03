@@ -44,3 +44,6 @@
 23. movement simulation with collisions
 24. map walk with collisions
 25. base 5 numbers
+
+# 2023 (Rust)
+1. string parsing
