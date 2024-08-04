@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-nginx-testdata
+data:
+  # property-like keys; each key maps to a simple value
+  index.html: |
+     <html>
+       <body>Hello World !!!</body>
+     </html>
+  secret.html: |
+     <html>
+       <body>this is another page</body>
+     </html>

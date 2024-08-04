@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: lhl/nginx:2
+        imagePullPolicy: 
+          IfNotPresent
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: DIRECT_PASSWORD
+          value: "heslo1"
+        - name: SECRET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret-nginx
+              key: secret-password
+        - name: INDEX_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: cm-nginx-testdata
+              key: index.html
+        ports:
+        - containerPort: 80
+        livenessProbe:
+              httpGet:
+                path: /?liveness
+                port: 80
+                httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+              initialDelaySeconds: 3
+              periodSeconds: 3
+        readinessProbe:
+              httpGet:
+                path: /?readiness
+                port: 80
+              periodSeconds: 10
+        volumeMounts:
+        - name: tmp1
+          mountPath: /var/cache/nginx
+        - name: tmp2
+          mountPath: /run
+        - name: cm-nginx-test-page
+          mountPath: /usr/share/nginx/html/test
+        - name: cm-nginx-doc-pages
+          mountPath: /usr/share/nginx/html/docs
+
+      volumes:
+      - name: tmp1
+        emptyDir: {}
+      - name: tmp2
+        emptyDir: {}
+      - name: cm-nginx-test-page
+        configMap:
+          name: cm-nginx-testdata
+      - name: cm-nginx-doc-pages
+        configMap:
+          name: cm-nginx-docdata

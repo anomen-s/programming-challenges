@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: first-test
+spec:
+  type: NodePort # alokuje port pro přímý přístup k microservice
+  selector:
+    app: nginx  # Toto by mělo odpovídat selektoru v definici vašeho Deploymentu
+  ports:
+    - port: 80  # Výchozí port pro nginx
+      targetPort: 80  # Port, na kterém běží nginx v rámci kontejneru
+      nodePort: 30007  # Port, na kterém bude služba dostupná z vnější sítě; musí být v rozsahu 30000-32767
