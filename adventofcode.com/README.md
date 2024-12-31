@@ -47,3 +47,6 @@
 
 # 2023 (Rust)
 1. string parsing
+
+# 2024 (Python w/ ChatGPT)
+1. List processing
