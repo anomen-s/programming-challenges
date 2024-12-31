@@ -50,3 +50,6 @@
 
 # 2024 (Python w/ ChatGPT)
 1. List processing
+2. Integer sequences
+3. String parsing
+4. Letter board scan
